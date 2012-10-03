@@ -1,0 +1,35 @@
+<MTCategoryOfArchive><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTKeyValue key='title' smarty_pants='1']"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTArchiveTitle smarty_pants='1']"$></MTIfNoKeyExists><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><$MTGetVar2 name="gallerytitle"></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogRelativeURL$>meta/css/master.css" />
+  <MTIfKeyExists key="css"><link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus='pld'$>/<$MTKeyValue key="css"$>" /></MTIfKeyExists>
+</head>
+
+<body class="title">
+
+<!-- BEGIN #content -->
+<div id="content">
+
+  <h1><a href="gallery/"><img src="img/title_img.gif" alt="<$MTGetVar2 name="gallerytitle">" width="<MTIfKeyExists key="imgw"><MTKeyValue key="imgw"$></MTIfKeyExists><MTIfNoKeyExists key="imgw">733</MTIfNoKeyExists>" height="<MTIfKeyExists key="imgh"><MTKeyValue key="imgh"></MTIfKeyExists><MTIfNoKeyExists key="imgh">334</MTIfNoKeyExists>" /></a></h1>
+  
+  <div id="gallerydesc">
+  <p><MTIfNonEmpty tag="MTKeyValuesStripped"><$MTKeyValuesStripped smarty_pants="1"$><MTElse><em>No description</em></MTElse></MTIfNonEmpty></p>
+  <p>Updated: <MTEntries lastn="1"><$MTEntryDate format="%B %Y"$></MTEntries></p>
+  <p>(<em><$MTCategoryCount$> photos</em>)
+    <a href="feed:<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/index.xml" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></p>
+  <p><a href="gallery/" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_view_gallery.gif" alt="View gallery" width="97" height="21" /></a></p>
+  </div>
+
+</div>
+<!-- END #content -->
+
+<p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName smarty_pants="1"$></a> > <$MTGetVar2 name="gallerytitle"></p>  
+
+</MTKeyValues></MTCategoryOfArchive>
+
+<$MTInclude module="Footer"$>
+
+</body>
+</html>

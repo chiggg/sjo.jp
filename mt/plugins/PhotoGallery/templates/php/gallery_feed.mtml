@@ -1,0 +1,25 @@
+<MTCategoryOfArchive><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTSetVarBlock name="gallerytitle"><MTKeyValue key="title"></MTSetVarBlock></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTSetVarBlock name="gallerytitle"><MTCategoryLabel></MTSetVarBlock></MTIfNoKeyExists><?xml version="1.0" encoding="<$MTPublishCharset$>"?>
+
+<rss version="2.0">
+<channel>
+<title><$MTBlogName remove_html="1" encode_xml="1"$>: <$MTGetVar name="gallerytitle" remove_html="1" encode_xml="1"$></title>
+<link><$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/</link>
+<description><MTIfNonEmpty tag="MTCategoryDescription"><$MTKeyValuesStripped remove_html="1" encode_xml="1"$><MTElse>No description</MTElse></MTIfNonEmpty></description>
+<copyright>Copyright <$MTDate format="%Y"$></copyright>
+<lastBuildDate><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></lastBuildDate>
+<generator>http://www.movabletype.org/?v=<$MTVersion$></generator>
+<docs>http://blogs.law.harvard.edu/tech/rss</docs> 
+
+<MTEntries lastn="15 sort_order="descend"><$MTSetVar name="useitem" value="1"$><MTIf tag="MTArchiveTitle" eq="Favorites"><MTIf tag="MTEntryCategory" ne=""><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="hidden"><$MTSetVar name="useitem" value="0"$></MTIfKeyExists></MTKeyValues></MTCategory></MTIf></MTIf><MTIf name="useitem" eq="1">
+<item>
+<title><$MTEntryTitle remove_html="1" encode_xml="1"$></title>
+<description>&lt;p&gt;&lt;a href=&quot;<$MTEntryLink$>&quot;&gt;<$MTEntryMore encode_xml="1"$>&lt;/a&gt;&lt;/p&gt;<MTIfNonEmpty tag="MTEntryExcerpt">&lt;p&gt;<$MTEntryExcerpt encode_xml="1"$>&lt;/p&gt;</MTIfNonEmpty></description>
+<link><$MTEntryPermalink encode_xml="1"$></link>
+<guid><$MTEntryPermalink encode_xml="1"$></guid>
+<category><MTIf tag="MTEntryCategory" ne=""><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTKeyValue key="title" encode_xml="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel encode_xml="1"$></MTIfNoKeyExists></MTKeyValues></MTCategory></MTIf></category>
+<pubDate><$MTEntryDate format_name="rfc822"$></pubDate>
+</item>
+</MTIf></MTEntries>
+
+</channel>
+</rss></MTKeyValues></MTCategoryOfArchive>

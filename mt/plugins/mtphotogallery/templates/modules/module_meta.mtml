@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="ja" lang="ja">
+<head>
+<meta name="generator" content="<$MTProductName version="1"$>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<$MTPublishCharset$>" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="alternate" type="application/atom+xml" title="Atom" href="<$MTLink template="atom"$>" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="<$MTLink template="rss"$>" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="<$MTLink template="rsd"$>" />
+<link rel="stylesheet" href="<$MTLink template="styles"$>" type="text/css" />
+<link rel="shortcut icon" href="<$MTBlogURL$>favicon.ico" />
+<link rel="start" href="<$MTBlogURL$>" title="Home" />
+
+<$mt:Include module="module_commonvar"$>
+<mt:ignore>トップページでの処理</mt:ignore><MTIf name="main_index">
+<link rel="stylesheet" href="<$mt:staticwebpath$><$mt:var name="themes"$>/css/jd.gallery.css" type="text/css">
+<script type="text/javascript" src="<$mt:staticwebpath$><$mt:var name="themes"$>/scripts/mootools.v1.11.js"></script>
+<script type="text/javascript" src="<$mt:staticwebpath$><$mt:var name="themes"$>/scripts/jd.gallery.js"></script>
+
+<script type="text/javascript"><!--
+    function startGallery() {
+        var myGallery = new gallery($("myGallery"), { 
+		timed: false,
+		textShowCarousel: "Photos",
+		showArrows: true,
+		showCarousel: true,
+		embedLinks: true,
+		showInfopane: true
+		});
+    }
+    window.onDomReady(startGallery);
+// --></script>
+</mt:if>
+
+<mt:ignore>アーカイブインデックスでの処理</mt:ignore><MTIf name="archive_index">
+<link rel="stylesheet" href="<$mt:staticwebpath$><$mt:var name="themes"$>/css/jd.gallery.css" type="text/css">
+<script type="text/javascript" src="<$mt:staticwebpath$><$mt:var name="themes"$>/scripts/mootools.v1.11.js"></script>
+<script type="text/javascript" src="<$mt:staticwebpath$><$mt:var name="themes"$>/scripts/jd.gallery.js"></script>
+<script type="text/javascript" src="<$mt:staticwebpath$><$mt:var name="themes"$>/scripts/jd.gallery.set.js"></script>
+<script type="text/javascript" src="<$mt:staticwebpath$><$mt:var name="themes"$>/scripts/HistoryManager.js"></script>
+<script type="text/javascript">
+	function startGallery() {
+		var myGallerySet = new gallerySet($('myGallerySet'), {
+		timed: false,
+		textShowCarousel: "Photos",
+		useHistoryManager: true
+		});
+	HistoryManager.start();
+	}
+window.addEvent('domready', startGallery);
+</script>
+</mt:if>
+<mt:ignore>
+[オプション]
+textShowCarousel = タブの文字列を変更する際に利用
+defaultTransition: "fadeslideleft"　= 写真を横スライドさせるオプション
+
+timed: true = 時間経過で写真切替
+delay: 4000 = 写真切替タイミング秒数
+</mt:ignore>
+
+<$MTCCLicenseRDF$>

@@ -1,0 +1,75 @@
+<?php
+  // Page Variables
+  include ("../galleryinfo.php");
+  $pgtitle = $gallerytitle . " > Gallery";
+  $section = "gallery";
+  $blogrelurl = "<$MTBlogRelativeURL$>";
+  $blogurl = "<$MTBlogURL$>";
+  $staticurl = "<$MTStaticWebPath$>";
+
+  // Functions
+  include ("<$MTStaticFilePath$>plugins/PhotoGallery/meta/functions/all.php");
+  
+<$MTInclude module="Photo Macro"$>
+<MTEntries><$MTSetVar name="useitem" value="1"$><MTIf tag="MTArchiveTitle" eq="Favorites"><MTCategories name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="hidden"><$MTSetVar name="useitem" value="0"$></MTIfKeyExists></MTKeyValues></MTCategories></MTIf><MTIf name="useitem" eq="1">
+  $imgs[] = Array(
+    "str" => '<MTGetVar name="photo" max_size="90">',
+    "lnk" => '<$MTEntryLink relative_url="1"$>',
+    "tag" => '<$MTEntryKeywords lower_case="1"$>'
+    );
+</MTIf></MTEntries>
+
+  $gallerycount = count($imgs);
+  
+  $gallerylimits = GalleryLimits($gallerycount);
+  extract($gallerylimits);
+
+  // Reverse array order if $displayorder set to "new" in cookie or POST variable:
+  if ($displayorder == "new") $imgs = array_reverse($imgs);
+
+  DocHead();
+  ContentOpen();
+?>
+<MTCategoryOfArchive><MTKeyValues source="[MTCategoryDescription]">
+
+<div class="galleryinfo">
+  <h1><?= $gallerytitle ?></h1>
+  <p class="desc"><?= $gallerydesc ?></p>
+<MTIf tag="MTCategoryLabel" eq="Favorites">  <p class="desc"><strong>Note:</strong> <em>Clicking through to an individual photo will land you in the original gallery to which that image belongs. So clicking Next/Previous on those pages will navigate among that gallery, instead of going forward or back one favorite.</em></p></MTIf>
+</div>
+
+<?php
+  echo "<ul class=\"slides\">\n";
+  if ($prevstart) {
+    echo '  <li class="backward"><a href="'.$prevstart.'">';
+    echo '<img alt="Previous page" title="Previous page" src="'.$blogrelurl.'meta/img/moreslide_prev.gif" width="90" height="67" />';
+    echo "</a></li>\n";
+  }
+  for ($i = ($lolimit-1); $i < $hilimit; $i++) {
+    $item = '  <li';
+    if ($imgs[$i]['tag']) $item .= ' class="'.$imgs[$i]['tag'].'"';
+    $item .= '><a href="'.$imgs[$i]['lnk'].'"';
+    if (IsVertical($imgs[$i]['str'])) $item .= ' class="v"';
+    $item .= '>'.$imgs[$i]['str'].'</a></li>'."\n";
+    echo $item;
+  }
+  if ($nextstart) {
+    echo '  <li class="forward"><a href="'.$nextstart.'">';
+    echo '<img alt="Next page" title="Next page" src="'.$blogrelurl.'meta/img/moreslide_next.gif" width="90" height="67" />';
+    echo "</a></li>\n";
+  }
+  echo "</ul>\n";
+?>
+
+<div class="galleryinfo">
+  <p>Subscribe to updates: <a href="<?= $fullgalleryurl ?>index.xml" class="i"><img src="<?= $blogrelurl ?>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></p>
+<?= GalleryNav($imgs) ?>
+</div>
+
+<?= ContentClose(); ?>
+
+<p id="path"><a href="<?= $blogrelurl ?>"><$MTBlogName smarty_pants="1"$></a> > <MTIf tag="MTArchiveTitle" eq="Favorites">Favorites<MTElse><a href="<?= $galleryurl ?>"><?= $gallerytitle ?></a> > Gallery</MTElse></MTIf></p>  
+
+</MTKeyValues></MTCategoryOfArchive>
+<MTInclude name="Footer">
+<?= DocFoot(); ?>

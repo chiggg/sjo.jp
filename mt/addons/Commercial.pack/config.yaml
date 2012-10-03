@@ -1,0 +1,194 @@
+name: Professional Pack
+version: 1.1
+schema_version: 1.11
+l10n_class: MT::Commercial::L10N
+
+init_app: $Commercial::CustomFields::Util::init_app
+
+object_types:
+    field: CustomFields::Field
+
+customfield_objects:
+    entry:
+        context: all
+    page:
+        context: all
+    category:
+        context: all
+    folder:
+        context: all
+    author:
+        context: system
+
+callbacks:
+    MT::App::CMS::init_request: $Commercial::MT::Commercial::Util::init_request
+    cms_pre_save.field: $Commercial::CustomFields::App::CMS::CMSPreSave_field
+    cms_post_save.entry: $Commercial::CustomFields::App::CMS::CMSPostSave_customfield_objs
+    cms_post_save.page: $Commercial::CustomFields::App::CMS::CMSPostSave_customfield_objs
+    cms_post_save.category: $Commercial::CustomFields::App::CMS::CMSPostSave_customfield_objs
+    cms_post_save.folder: $Commercial::CustomFields::App::CMS::CMSPostSave_customfield_objs
+    cms_post_save.author: $Commercial::CustomFields::App::CMS::CMSPostSave_customfield_objs
+    cms_post_save.field: $Commercial::CustomFields::App::CMS::CMSPostSave_field
+    api_post_save.entry: $Commercial::CustomFields::XMLRPCServer::APIPostSave_entry
+    cms_save_filter.entry: $Commercial::CustomFields::App::CMS::CMSSaveFilter_customfield_objs
+    cms_save_filter.page: $Commercial::CustomFields::App::CMS::CMSSaveFilter_customfield_objs
+    cms_save_filter.category: $Commercial::CustomFields::App::CMS::CMSSaveFilter_customfield_objs
+    cms_save_filter.folder: $Commercial::CustomFields::App::CMS::CMSSaveFilter_customfield_objs
+    cms_save_filter.author: $Commercial::CustomFields::App::CMS::CMSSaveFilter_customfield_objs
+    cms_save_filter.field: $Commercial::CustomFields::App::CMS::CMSSaveFilter_field
+    cms_pre_preview: $Commercial::CustomFields::App::CMS::CMSPrePreview_customfield_objs
+    MT::Category::post_remove: $Commercial::CustomFields::App::CMS::post_remove_object
+    MT::Folder::post_remove: $Commercial::CustomFields::App::CMS::post_remove_object
+    MT::App::CMS::template_param.cfg_content_nav: $Commercial::CustomFields::App::CMS::cfg_content_nav_param
+    MT::App::CMS::template_param.cfg_system_content_nav: $Commercial::CustomFields::App::CMS::cfg_content_nav_param
+    MT::App::CMS::template_source.edit_category: $Commercial::CustomFields::App::CMS::add_calendar_src
+    MT::App::CMS::template_source.edit_folder: $Commercial::CustomFields::App::CMS::add_calendar_src
+    MT::App::CMS::template_source.edit_author: $Commercial::CustomFields::App::CMS::add_calendar_src
+    MT::App::CMS::template_param.edit_entry: $Commercial::CustomFields::App::CMS::edit_entry_param
+    MT::App::CMS::template_param.edit_category: $Commercial::CustomFields::App::CMS::edit_category_param
+    MT::App::CMS::template_param.edit_folder: $Commercial::CustomFields::App::CMS::edit_category_param
+    MT::App::CMS::template_param.edit_author: $Commercial::CustomFields::App::CMS::edit_author_param
+    MT::App::CMS::template_param.asset_insert: $Commercial::CustomFields::App::CMS::asset_insert_param
+    MT::App::CMS::template_param.cfg_entry: $Commercial::CustomFields::App::CMS::cfg_entry_param
+    MT::App::CMS::template_param.widget/new_version: $Commercial::CustomFields::App::CMS::new_version_widget
+    restore: $Commercial::CustomFields::BackupRestore::cb_restore_objects
+    restore_asset: $Commercial::CustomFields::BackupRestore::cb_restore_asset
+    blog_template_set_change: $Commercial::MT::Commercial::Util::on_template_set_change
+
+applications:
+    cms:
+        methods:
+            list_field: $Commercial::CustomFields::App::CMS::list_field
+            edit_field: $Commercial::CustomFields::App::CMS::edit_field
+            save_field_order: $Commercial::CustomFields::App::CMS::save_field_order
+            prep_customfields_upgrade: $Commercial::CustomFields::App::CMS::prep_customfields_upgrade
+        menus:
+            prefs:custom_fields:
+                label: Custom Fields
+                order: 500
+                mode: list_field
+                permission: administer_blog,edit_config
+                system_permission: administer
+
+upgrade_functions:
+    customfields_page_meta:
+        version_limit: 1.1
+        handler: $Commercial::CustomFields::Upgrade::customfields_page_meta
+
+stylecatcher_libraries:
+    universal_themes:
+        label: Universal Website
+        order: 100
+        description_label: Themes that are compatible with the Universal Website template set.
+
+template_sets:
+    universal_website:
+        label: Universal Website
+        base_path: templates
+        order: 100
+        templates:
+            index:
+                main_index:
+                    label: Main Index
+                    outfile: index.html
+                    rebuild_me: 1
+                blog_index:
+                    label: Blog Index
+                    outfile: blog/index.html
+                    rebuild_me: 1
+                archive_index:
+                    label: Archive Index
+                    outfile: archives.html
+                    rebuild_me: 1
+                styles:
+                    label: Stylesheet
+                    outfile: styles.css
+                    rebuild_me: 1
+                javascript:
+                    label: JavaScript
+                    outfile: mt.js
+                    rebuild_me: 1
+                atom:
+                    label: Atom
+                    outfile: atom.xml
+                    rebuild_me: 1
+                rsd:
+                    label: RSD
+                    outfile: rsd.xml
+                    rebuild_me: 1
+                rss:
+                    label: RSS
+                    outfile: rss.xml
+                    rebuild_me: 1
+            archive:
+                entry_listing:
+                    label: Blog Entry Listing
+                    mappings:
+                        monthly:
+                            archive_type: Monthly
+                        category:
+                            archive_type: Category
+            individual:
+                entry:
+                    label: Entry
+                    mappings:
+                        entry_archive:
+                            archive_type: Individual
+                page:
+                    label: Page
+                    mappings:
+                        page_archive:
+                            archive_type: Page
+            module:
+                header:
+                    label: Header
+                footer:
+                    label: Footer
+                navigation:
+                    label: Navigation
+                categories:
+                    label: Categories
+                comment_detail:
+                    label: Comment Detail
+                comment_form:
+                    label: Comment Form
+                comments:
+                    label: Comments
+                entry_detail:
+                    label: Entry Detail
+                entry_metadata:
+                    label: Entry Metadata
+                entry_summary:
+                    label: Entry Summary
+                page_detail:
+                    label: Page Detail
+                sidebar:
+                    label: Sidebar
+                tags:
+                    label: Tags
+                trackbacks:
+                    label: TrackBacks
+                homepage_image:
+                    label: Homepage Image
+            system:
+                comment_preview:
+                    label: Comment Preview
+                comment_response:
+                    label: Comment Response
+                dynamic_error:
+                    label: Dynamic Error
+                popup_image:
+                    label: Popup Image
+                search_results:
+                    label: Search Results
+            widget:
+                powered_by_footer:
+                    label: Powered By (Footer)
+                sign_in_top:
+                    label: Sign In (In Header)
+                search_top:
+                    label: Search (In Navigation)
+                recent_entries_expanded:
+                    label: Recent Entries Expanded
+                footer_links:
+                    label: Footer Links

@@ -1,0 +1,85 @@
+<script type="text/javascript" src="<$MTStaticWebPath$>js/commenter_name.js"></script>
+<script type="text/javascript" src="<$MTBlogSitePath$>mt-site.js"></script>
+<script type="text/javascript">
+<!--
+writeTypeKeyGreeting(commenter_name, <$MTEntryID$>);
+//-->
+</script>
+
+<MTIfCommentsModerated>
+<p class="comments-open-moderated">
+(If you haven't left a comment here before, you may need to be approved by the site owner before your comment will appear. Until then, it won't appear on the entry. Thanks for waiting.)
+</p>
+</MTIfCommentsModerated>
+
+
+<MTIfNonEmpty tag="MTGetVar" name="static"><MTElse><$MTSetVar name="static" value="1"$></MTElse></MTIfNonEmpty>
+<MTIf name="preview" eq="1">
+  <MTIfNonZero tag="MTCommentPreviewIsStatic">
+    <$MTSetVar name="static" value="1"$>
+    <MTElse><$MTSetVar name="static" value="0"$></MTElse>
+  </MTIfNonZero>
+</MTIf>
+
+<form method="post" action="<$MTCGIPath$><$MTCommentScript$>" onsubmit="if (this.bakecookie[0].checked) rememberMe(this)" id="comments-form">
+
+  <table cellspacing="0">
+  <tr valign="top" align="left" id="row-name">
+    <th><label for="c-author">Name:</label></th>
+    <td><input tabindex="1" id="c-author" name="author" class="text" value="<MTIf name="preview" eq="1"><$MTCommentPreviewAuthor$></MTIf>" /></td>
+  </tr>
+
+  <tr valign="top" align="left" id="row-email">
+    <th><label for="c-email">Email:</label></th>
+    <td><input tabindex="2" id="c-email" name="email" class="text" value="<MTIf name="preview" eq="1"><$MTCommentPreviewEmail$></MTIf>" /> <em>(not displayed)</em></td>
+  </tr>
+
+  <tr valign="top" align="left">
+    <th><label for="c-url">URL:</label></th>
+    <td><input tabindex="3" type="text" name="url" id="c-url" class="text" value="<MTIf name="preview" eq="1"><$MTCommentPreviewURL$></MTIf>" /></td>
+  </tr>
+
+  <tr valign="top" align="left">
+    <th>&nbsp;</th>
+    <td>remember me?&nbsp; <input type="radio" id="c-remember" name="bakecookie" />&nbsp;<label for="c-remember">Yes</label>&nbsp;
+    <input type="radio" id="c-forget" name="bakecookie" onclick="forgetMe(this.form)" value="Forget Info" />&nbsp;<label for="c-forget">No</label>
+    <input type="hidden" name="static" value="<$MTGetVar name="static"$>" />
+    <input type="hidden" name="entry_id" value="<$MTEntryID$>" /></td>
+  </tr>
+
+  <tr valign="top" align="left">
+    <th><label for="c-text">Comment:</label></th>
+    <td><textarea tabindex="4" id="c-text" name="text" rows="10" cols="40"><MTIf name="preview" eq="1"><$MTCommentPreviewBody convert_breaks="0" encode_html="1"$></MTIf></textarea></td>
+  </tr>
+
+  <tr valign="top" align="left">
+    <th class="buttons">&nbsp;</th>
+    <td class="buttons"><input type="submit" name="preview" tabindex="5" value="Preview" id="btn-preview" /> <input type="submit" name="post" tabindex="6" value="Post" id="btn-post" />
+    <p>Avoid clicking &ldquo;Post&rdquo; more than once.</p></td>
+  </tr>
+  </table>
+</form>
+
+<script type="text/javascript">
+  <!--
+  <MTIf name="preview" eq="1">
+    <MTElse>
+      if (document.getElementById('c-email').value != undefined)
+        document.getElementById('c-email').value = getCookie("mtcmtmail");
+      if (document.getElementById('c-author').value != undefined)
+        document.getElementById('c-author').value = getCookie("mtcmtauth");
+      if (document.getElementById('c-url').value != undefined)
+        document.getElementById('c-url').value = getCookie("mtcmthome");
+    </MTElse>
+  </MTIf>
+  if (getCookie("mtcmtauth") || getCookie("mtcmthome")) {
+    document.getElementById('c-remember').checked = true;
+  } else {
+    document.getElementById('c-forget').checked = true;
+  }
+  if (commenter_name) {
+    document.getElementById('row-email').style.display = 'none';
+    document.getElementById('row-name').style.display = 'none';
+  }
+  //-->
+</script>

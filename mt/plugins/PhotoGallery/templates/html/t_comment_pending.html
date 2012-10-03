@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><$MTBlogName encode_html="1"$>: Thank You for Commenting</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogURL$>meta/css/master.css" />
+</head>
+
+<body class="comments-entry">
+
+
+<div id="comment-photo">
+  <ul class="slides">
+    <li<MTIfNonEmpty tag="MTEntryKeywords"> class="<$MTEntryKeywords dirifyplus="pld"$>"</MTIfNonEmpty>><a href="<$MTEntryLink$>"<MTCollect tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect> accesskey=","><$MTEntryMore$></a></li>
+  </ul>
+
+  <div id="desc">
+    <h1><$MTEntryTitle smarty_pants="1"$></h1>
+    <p><em class="date"><$MTEntryDate format="%e %B %Y"$></em>
+    <MTIfNonEmpty tag="MTEntryKeywords"><br /><$MTEntryKeywords smarty_pants="1"$></MTIfNonEmpty></p>
+  </div>
+</div>
+
+<!-- BEGIN #content -->
+<div id="content">
+
+
+<h2>Thank you for commenting</h2>
+
+<p>Your comment has been received, but it may have contained questionable content. To protect against malicious comments, your comment is being held for approval. If your comment is deemed suitable, it will be approved when convenient; there is no need to re-post your comment.
+
+<a href="<$MTCGIPath$><$MTCommentScript$>?entry_id=<$MTEntryID$>">Return to the comment page.</a></p>
+
+
+</div>
+<!-- END #content -->
+
+<p id="path"><a href="<$MTBlogURL$>"><$MTBlogName smarty_pants="1"$></a> > <a href="<$MTBlogArchiveURL$><$MTEntryCategory dirifyplus='pld'$>/"><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists></MTKeyValues></MTCategory></a> > <a href="<$MTBlogArchiveURL$><$MTEntryCategory dirifyplus='pld'$>/gallery/">Gallery</a> > <a href="<$MTEntryLink$>"><$MTEntryTitle smarty_pants="1"$></a> > Comment Pending</p>
+
+
+<$MTInclude module="Footer"$>
+</body>
+</html>

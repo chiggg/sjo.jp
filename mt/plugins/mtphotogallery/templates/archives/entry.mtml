@@ -1,0 +1,126 @@
+<MTSetVarBlock name="page_title"><$MTEntryTitle$></MTSetVarBlock>
+<MTSetVarBlock name="title"><$MTGetVar name="page_title"$> - <$MTBlogName encode_html="1"$></MTSetVarBlock>
+<MTSetVarBlock name="html_head">
+	<MTEntryPrevious><link rel="prev" href="<$MTEntryPermalink$>" title="<$MTEntryTitle encode_html="1"$>" /></MTEntryPrevious>
+	<MTEntryNext><link rel="next" href="<$MTEntryPermalink$>" title="<$MTEntryTitle encode_html="1"$>" /></MTEntryNext>
+	<MTIfPingsAccepted><$MTEntryTrackbackData$></MTIfPingsAccepted>
+	<MTIfCommentsAccepted><script type="text/javascript" src="<$MTLink template="javascript"$>"></script></MTIfCommentsAccepted>
+</MTSetVarBlock>
+<MTIfCommentsAccepted><$MTSetVar name="body_onload" value="individualArchivesOnLoad(commenter_name)"$></MTIfCommentsAccepted>
+<$mt:Include module="module_meta"$>
+
+<title><$MTGetVar name="title"$></title>
+<meta name="description" content="<$MTEntryExcerpt$>" />
+<meta name="keywords" content="<$MTEntryKeywords$>" />
+<$mt:var name="html_head"$>
+</head>
+<body>
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<div id="center">
+<div class="content">
+
+
+<$MTInclude module="ブログ記事の詳細"$>
+<$MTInclude module="ブログ記事のメタデータ"$>
+
+<$MTInclude module="トラックバック"$>
+<$MTInclude module="コメント"$>
+
+
+<p class="content-nav">
+	<MTEntryPrevious><a href="<$MTEntryPermalink$>" title="<$MTEntryTitle$>"><$MTEntryTitle$></a>｜</MTEntryPrevious>
+	<MTEntryNext>｜<a href="<$MTEntryPermalink$>" title="<$MTEntryTitle$>"><$MTEntryTitle$></a></MTEntryNext>
+</p>
+
+
+<p class="totop"><a href="#header">ページトップへ</a>
+</div></div>
+
+
+
+<div id="right-side">
+
+
+<MTEntryIfTagged>
+<div class="entryrelate">
+<h4>Related Entry</h4>
+<ul>
+<MTSetVarBlock name="entrytags"><MTEntryTags glue=" OR "><$MTTagName$></MTEntryTags></MTSetVarBlock>
+<MTSetVarBlock name="thisid"><MTEntryID></MTSetVarBlock>
+<MTSetVar name="match" value="0">
+
+<MTEntries tag="$entrytags" lastn="11">
+<MTEntryAssets type="image" lastn="1">
+
+<MTSetVarBlock name="eid"><MTEntryID></MTSetVarBlock>
+<MTSetVarBlock name="entryCount"><MTEntriesCount></MTSetVarBlock>
+<MTIf name="entryCount" gt="1">
+
+<MTUnless name="__last__">
+	<MTUnless name="eid" eq="$thisid">
+	<li><a href="<MTEntryPermalink>"><img src="<$MTAssetThumbnailURL width="260"$>" /></a></li>
+	<MTElse><MTSetVar name="match" value="1"></MTElse>
+	</MTUnless>
+		<MTElse>
+			<MTIf name="match">
+			<li><a href="<MTEntryPermalink>"><MTEntryTitle></a></li>
+				<MTElse>
+				<MTIf name="__counter__" ne="11"><li><a href="<MTEntryPermalink>"><img src="<$MTAssetThumbnailURL width="260"$>" /></a></li>				</MTIf>
+				</MTElse>
+			</MTIf>
+		</MTElse>
+</MTUnless>
+</MTIf>
+
+</MTEntryAssets>
+</MTEntries>
+</ul>
+</div>
+</MTEntryIfTagged>
+
+
+
+<MTIf name="entry_template">
+<MTIfNonEmpty tag="EntryCategory">
+<div class="entry-categories">
+<h4>Entry Categories</h4>
+<ul><MTEntryCategories>
+<li><a href="<$MTCategoryArchiveLink$>"><$MTCategoryLabel$></a></li>
+</MTEntryCategories></ul>
+</div>
+</MTIfNonEmpty>
+</MTIf>
+
+
+
+<MTEntryIfTagged>
+<div class="entry-tags">
+<h4>Entry Tags</h4>
+<ul><MTEntryTags>
+<li><a href="<$MTTagSearchLink$>&amp;IncludeBlogs=<$MTBlogID$>" rel="tag"><$MTTagName$></a></li>
+</MTEntryTags></ul>
+</div>
+</MTEntryIfTagged>
+
+</div><!-- right-side end -->
+
+</div></div><!--main end -->
+
+
+
+<$mt:Include module="フッター"$>
+<MTIfCommentsAccepted>
+<script type="text/javascript">
+<!--
+individualArchivesOnLoad(commenter_name);
+//-->
+</script>
+</MTIfCommentsAccepted>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><$MTBlogName smarty_pants="1"$></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogRelativeURL$>meta/css/master.css" />
+</head>
+
+<body class="index">
+
+<!-- BEGIN #content -->
+<div id="content">
+
+<h1><$MTBlogName smarty_pants="1"$></h1>
+
+<$MTSetVar2 name="galleryno" value="0"$>
+<$MTSetVar2 name="totalphotos" value="0"$>
+<MTCollateCollect>
+  <MTCategories><MTFilterCategories exclude="Favorites">`
+    <MTKeyValues source="[MTCategoryDescription]">
+    <MTIfNoKeyExists key="hidden">
+    <MTCollateRecord>
+      <MTEntries lastn="1">
+        <MTCollateSetField name="sortdate"><$MTEntryDate format="%Y-%m-%d-%H-%M-%S"$></MTCollateSetField>
+        <MTCollateSetField name="date"><$MTEntryDate format="%b %Y"$></MTCollateSetField>
+      </MTEntries>
+      <MTCollateSetField name="path"><$MTCategoryLabel dirifyplus="pld"$></MTCollateSetField>
+      <MTCollateSetField name="title"><MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists></MTCollateSetField>
+      <MTCollateSetField name="count"><$MTCategoryCount$></MTCollateSetField>
+      <MTCollateSetField name="desc"><MTIfNonEmpty tag="MTKeyValuesStripped"><MTFirstNWords n="9" append="&#8230;" append_decode_html="1"><$MTKeyValuesStripped smarty_pants="1" remove_html="1"$></MTFirstNWords><MTElse><em>No description</em></MTElse></MTIfNonEmpty></MTCollateSetField>
+    </MTCollateRecord>
+      <$MTAddVar name="galleryno" value="1"$>
+      <$MTAddVar name="totalphotos" value="[MTCategoryCount]"$>
+    </MTIfNoKeyExists>
+    </MTKeyValues>
+  </MTFilterCategories></MTCategories>
+</MTCollateCollect>
+
+<div class="galleries">
+  <h2>Recently Updated Galleries</h2>
+<MTIfGreater a="[MTGetVar2 name='galleryno']" b="0">
+<MTGrid num_columns="3"><MTCollateList limit="6 sortdate:-" sort="sortdate:-"><MTGridCell>
+<MTGridIfLeftColumn>
+  <ul>
+</MTGridIfLeftColumn>    <li>
+      <h3><a href="<$MTBlogArchiveURL relative_url="1"$><MTCollateField name="path">/"><MTCollateField name="title"></a></h3>
+      <a href="<$MTBlogArchiveURL relative_url="1"$><MTCollateField name="path">/" class="img"><img src="<$MTBlogArchiveURL relative_url="1"$><MTCollateField name="path">/img/title_img_sm.gif" alt="" width="220" height="69" /></a>
+      <p><em>(<MTCollateField name="count"> photos)</em> <MTCollateField name="desc"></p>
+      <p><MTCollateField name="date"></p>
+    </li>
+<MTGridIfRightColumn>  </ul>
+</MTGridIfRightColumn></MTGridCell></MTCollateList><MTGridTrailingCells><MTGridIfRightColumn>  </ul></MTGridIfRightColumn></MTGridTrailingCells></MTGrid>
+  <p class="mainbutton"><a href="<$MTBlogRelativeURL$>galleries/" class="btn"><img src="<$MTBlogRelativeURL$>meta/img/btn_gallery_archive.gif" width="118" height="21" alt="Gallery Archive" /></a></p><MTElse><p>No galleries published yet.</p></MTElse></MTIfGreater>
+</div>
+
+<!-- BEGIN #secondary -->
+<div id="secondary">
+
+<!-- BEGIN .module -->
+<div class="module">
+
+<h2>Description</h2>
+
+  <MTIfNonEmpty tag="MTBlogDescription"><p><$MTBlogDescription smarty_pants="1"$></p><MTElse><p>You&#8217;re viewing a set of galleries featuring the photos I have taken recently.</p><p>The Movable Type <a href="http://stopdesign.com/templates/photos/">templates</a> that build these pages are available for anyone to download and use.</p></MTElse></MTIfNonEmpty>
+
+</div>
+<!-- END .module -->
+
+
+<!-- BEGIN .module -->
+<div class="module">
+
+<$MTSetVar name="favexists" value="false"$><MTCategories><MTIfEqual a="[MTCategoryLabel]" b="Favorites"><$MTSetVar name="favexists" value="true"$><$MTSetVar2 name="favitem" value="0"$></MTIfEqual></MTCategories>
+<h2>Favorites</h2>
+<MTIfEqual a="[MTGetVar name='favexists']" b="true"><MTCategory name="Favorites"><$MTSetVar2 name="favcount" value="0"$></MTCategory><ul id="favlist">
+<MTEntries category="Favorites" sort_order="descend"><$MTSetVar name="useitem" value="0"$><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfNoKeyExists key="hidden"><$MTSetVar name="useitem" value="1"$></MTIfNoKeyExists></MTKeyValues></MTCategory><MTIfEqual a="[MTGetVar name='useitem']" b="1"><MTIfLess a="[MTGetVar2 name='favitem']" b="6" numeric="1">
+  <li><a href="<$MTEntryLink relative_url="1"$>"<MTCollect tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect>><$MTEntryMore$></a></li>
+<MTAddVar name="favitem" value="1"></MTIfLess><$MTAddVar name="favcount" value="1"$></MTIfEqual></MTEntries>
+</ul>
+<MTIfGreater a="[MTGetVar2 name='favcount']" b="6" numeric="1"><p class="mainbutton"><a href="<$MTBlogArchiveURL relative_url="1"$>favorites/" class="btn"><img src="<$MTBlogRelativeURL$>meta/img/btn_all_favorites.gif" width="100" height="21" alt="All Favorites" /></a></p></MTIfGreater>
+<MTElse>
+<p>No favorites selected yet.</p>
+</MTElse></MTIfEqual>
+
+</div>
+<!-- END .module -->
+
+
+
+<!-- BEGIN .module -->
+<div class="module">
+
+<h2>Gallery data</h2>
+<table cellspacing="0" class="gallerydata">
+  <tr>
+    <th><a href="<$MTBlogRelativeURL$>galleries/">Galleries</a></th>
+    <td><$MTGetVar2 name="galleryno"$></td>
+    <td><a href="<$MTBlogURL$>galleries/galleries.xml" title="RSS feed for recent galleries" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+  </tr>
+  <tr>
+    <th>Photos</th>
+    <td><$MTGetVar2 name="totalphotos"$></td>
+    <td><a href="<$MTBlogURL$>index.xml" title="RSS feed for recent photos" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+  </tr>
+<MTIfGreater a="[MTBlogCommentCount]" b="0" numeric="1">  <tr>
+    <th><a href="<$MTBlogRelativeURL$>comments/">Comments</a></th>
+    <td><$MTBlogCommentCount$></td>
+    <td><a href="<$MTBlogURL$>comments/comments.xml" title="RSS feed for recent comments" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+  </tr></MTIfGreater>
+<MTIfEqual a="[MTGetVar name='favexists']" b="true">  <tr>
+    <th><a href="<$MTBlogArchiveURL relative_url="1"$>favorites/">Favorites</a></th>
+    <td><$MTGetVar2 name="favcount"$></td>
+    <td><a href="<$MTBlogArchiveURL relative_url="1"$>favorites/index.xml" title="RSS feed for favorite photos" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+  </tr></MTIfEqual>
+</table>
+
+</div>
+<!-- END .module -->
+
+</div>
+<!-- END #secondary -->
+
+
+
+</div>
+<!-- END #content -->
+
+
+<p id="path"><$MTBlogName smarty_pants="1"$></p>  
+
+
+<$MTInclude module="Footer"$>
+</body>
+</html>

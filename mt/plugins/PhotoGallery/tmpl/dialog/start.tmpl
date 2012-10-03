@@ -1,0 +1,62 @@
+<mt:setvarblock name="page_title"><__trans phrase="Add Photo to Gallery"></mt:setvarblock>
+
+<mt:include name="dialog/header.tmpl">
+
+<mt:if name="finish">
+<script type="text/javascript">
+<!--
+<mt:var name="insert_script">
+closeDialog();
+//-->
+</script>
+<mt:else>
+<form method="post" enctype="multipart/form-data" action="<mt:var name="script_url">" id="upload-form">
+    <input type="hidden" name="__mode" value="PhotoGallery.upload_photo" />
+    <input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
+    <input type="hidden" name="magic_token" value="<mt:var name="magic_token">" />
+
+    <mtapp:setting
+        id="category"
+        label_class="top-label"
+        label="<__trans phrase="Select an Album">"
+        hint=""
+        show_hint="0">
+        <select name="category_id">
+<TMPL_LOOP NAME=CATEGORY_LOOP>
+<mt:if name="category_label" ne="Favorites">
+          <option value="<TMPL_VAR NAME=CATEGORY_ID>"><TMPL_VAR NAME=CATEGORY_LABEL></option>
+</mt:if>
+</TMPL_LOOP>
+        </select>
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="file"
+        label_class="top-label"
+        label="<__trans phrase="Select File to Upload">"
+        hint=""
+        show_hint="0">
+        <input type="file" name="file" />
+    </mtapp:setting>
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner pkg actions">
+            <button
+                type="submit"
+                accesskey="s"
+                title="<__trans phrase="Upload (s)">"
+                class="primary-button"
+                ><__trans phrase="Upload Photo"></button>
+            <button
+                onclick="closeDialog(); return false"
+                type="submit"
+                accesskey="x"
+                title="<__trans phrase="Cancel (x)">"
+                ><__trans phrase="Cancel"></button>
+        </div>
+    </div>
+
+</form>
+</mt:if>
+
+<mt:include name="dialog/footer.tmpl">

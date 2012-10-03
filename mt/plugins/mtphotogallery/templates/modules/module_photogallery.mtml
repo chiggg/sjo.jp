@@ -1,0 +1,39 @@
+<div class="gallery-out">
+<mt:if name="main_index">
+<div id="myGallery">
+<MTEntries lastn="30">
+<MTEntryAssets type="image">
+	<div class="imageElement">
+		<h3><$MTAssetLabel$></h3>
+		<p><MTIfNonEmpty tag="MTAssetDescription"><$MTAssetDescription$><MTElse><$mt:EntryExcerpt convert_breads="0" words="30"$></MTElse></MTIfNonEmpty></p>
+		<a href="<$MTEntryPermalink$>" class="open"></a>
+		<img src="<$MTAssetURL$>" class="full" />
+		<img src="<$MTAssetThumbnailURL width="100"$>" class="thumbnail" />	</div>
+</MTEntryAssets>
+</MTEntries>
+</div>
+
+<mt:else>
+<div id="myGallerySet">
+<MTCategories>
+<div id="gallery<$MTCategoryID$>" class="galleryElement">
+<h2><$MTCategoryLabel$></h2>
+
+<MTEntries>
+<MTEntryAssets type="image">
+	<div class="imageElement">
+		<h3><$MTAssetLabel$></h3>
+		<p><MTIfNonEmpty tag="MTAssetDescription"><$MTAssetDescription$><MTElse><$mt:EntryExcerpt convert_breads="0" words="30"$></MTElse></MTIfNonEmpty></p>
+		<a href="<$MTEntryPermalink$>" title="open image" class="open"></a>
+		<img src="<$MTAssetURL$>" class="full" />
+		<img src="<$MTAssetThumbnailURL width="100"$>" class="thumbnail" />
+	</div>
+</MTEntryAssets>
+</MTEntries>
+
+</div>
+</MTCategories>
+</div>
+
+</mt:if>
+</div>

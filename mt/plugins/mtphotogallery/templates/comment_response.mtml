@@ -1,0 +1,46 @@
+<MTSetVar name="system_template" value="1">
+<MTSetVarBlock name="title"><$MTBlogName encode_html="1"$>: <$MTGetVar name="page_title"$></MTSetVarBlock>
+<MTIf name="body_class" eq="mt-comment-confirmation">
+    <MTSetVarBlock name="page_title">投稿されたコメント</MTSetVarBlock>
+    <MTSetVar name="heading" value="確認">
+    <MTSetVarBlock name="message"><p>コメントを投稿しました。</p></MTSetVarBlock>
+</MTIf>
+<MTIf name="body_class" eq="mt-comment-pending">
+    <MTSetVarBlock name="page_title">コメント保留中</MTSetVarBlock>
+    <MTSetVar name="heading" value="コメントありがとうございます。">
+    <MTSetVarBlock name="message"><p>コメントは現在承認されるまで公開を保留されています。</p></MTSetVarBlock>
+</MTIf>
+<MTIf name="body_class" eq="mt-comment-error">
+    <MTSetVarBlock name="page_title">コメント投稿エラー</MTSetVarBlock>
+    <MTSetVar name="heading" value="$page_title">
+    <MTSetVarBlock name="message"><p>コメントの投稿に失敗しました:</p><blockquote><$MTErrorMessage$></blockquote></MTSetVarBlock>
+</MTIf>
+
+<$mt:Include module="module_meta"$>
+<title><$MTGetVar name="title"$></title>
+</head>
+<body class="<MTIf name="body_class"><$MTGetVar name="body_class"$></MTIf>">
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<div id="center">
+<div class="content">
+<h2><$MTGetVar name="heading"$></h2>
+
+<$MTGetVar name="message"$>
+
+<p><a href="<$MTEntryLink$>">元のブログ記事</a>に戻る</p>
+</div>
+</div>
+
+</div></div><!-- main end -->
+
+
+
+<$mt:Include module="フッター"$>
+</body>
+</html>

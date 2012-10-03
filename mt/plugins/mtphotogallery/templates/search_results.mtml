@@ -1,0 +1,81 @@
+<MTSetVar name="system_template" value="1">
+<MTSetVar name="search_results_template" value="1">
+<MTSetVarBlock name="page_title"><$MTSearchString$>：検索結果</MTSetVarBlock>
+<MTSetVarBlock name="title"><$MTGetVar name="page_title"$> - <$MTBlogName encode_html="1"$></MTSetVarBlock>
+<MTIfStraightSearch><MTSetVar name="search_type" value="search">
+<MTElse><MTSetVar name="search_type" value="tag">
+</MTIfStraightSearch>
+<$mt:Include module="module_meta"$>
+
+<title><$MTGetVar name="title"$></title>
+<meta name="description" content="「<$MTSearchString$>」のサイト内検索結果です。" />
+<meta name="keywords" content="<$MTSearchString$>,<MTTags top="5" glue=","><$MTTagName$></MTTags>" />
+<$mt:var name="html_head"$>
+</head>
+<body>
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<div id="center">
+<div class="content">
+
+
+<MTSearchResults>
+<MTBlogResultHeader>
+<h2>
+<MTIfStraightSearch>「<$MTSearchString$>」と一致するもの</MTIfStraightSearch>
+<MTIfTagSearch>タグ「<$MTSearchString$>」が付けられているもの</MTIfTagSearch>
+</h2>
+<div class="search-results-container">
+<ul>
+</MTBlogResultHeader>
+
+<li><$MTEntryDate$>：<a href="<$MTEntryPermalink$>" title="<$MTEntryPermalink$>"><$MTEntryTitle$></a></li>
+
+<MTBlogResultFooter></ul></div></MTBlogResultFooter>
+</MTSearchResults>
+
+
+<MTNoSearchResults>
+<h2>
+<MTIfStraightSearch>「<$MTSearchString$>」と一致するもの</MTIfStraightSearch>
+<MTIfTagSearch>タグ「<$MTSearchString$>」が付けられているもの</MTIfTagSearch>
+</h2>
+<p>「<$MTSearchString$>」と一致する結果は見つかりませんでした。</p>
+</MTNoSearchResults>
+
+<MTNoSearch>
+<p>すべての単語が順序に関係なく検索されます。フレーズで検索したいときは引用符で囲んでください。</p>
+<blockquote>
+    <p><code>"gallely photos"</code></p>
+</blockquote>
+<p>AND、OR、NOTを入れることで論理検索を行うこともできます。</p>
+<blockquote>
+    <p><code>個人 OR 出版</code></p>
+    <p><code>個人 NOT 出版</code></p>
+</blockquote>
+</MTNoSearch>
+
+
+</div></div>
+
+
+
+<div id="right-side">
+<$mt:Include module="module_search"$>
+<$mt:Include module="module_tagcloud"$>
+</div><!-- right-side end -->
+
+
+</div></div><!--main end -->
+
+
+
+
+<$mt:Include module="フッター"$>
+</body>
+</html>

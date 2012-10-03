@@ -1,0 +1,13 @@
+<__trans_section component="commercial">
+<div class="comment<mt:if name="__odd__"> odd<mt:else> even</mt:if>"<MTIfArchiveTypeEnabled archive_type="Individual"> id="comment-<$MTCommentID$>"</MTIfArchiveTypeEnabled>>
+    <div class="inner">
+        <div class="comment-header">
+            <__trans phrase="[_1] [_2] on" params="<$MTCommentAuthorLink default_name="Anonymous" show_email="0"$>%%<MTIfNonEmpty tag="CommentAuthorIdentity"><$MTCommentAuthorIdentity$></MTIfNonEmpty>"> <__trans phrase="<a href="[_1]" title="Permalink to this comment">[_2]</a>" params="#comment-<$MTCommentID$>%%<$MTCommentDate format="%x %X"$>">
+        </div>
+        <div class="comment-content">
+            
+            <$MTCommentBody$>
+        </div>
+    </div>
+</div>
+</__trans_section>

@@ -1,0 +1,135 @@
+key:         MT::Plugin::MTPhotogallerySet
+name:        Photogallery Template Set for MT
+description: エントリーにアップした画像をSmooth Galleryで閲覧出来るテンプレート・セットです。
+author_name: arata
+author_link: http://www.materializing.net/
+plugin_link: http://www.materializing.net/mtphotogallery/
+version:     1.00
+
+template_sets:
+  mtphotogallery_set:
+    label: Photogallery for MT 1.00
+    base_path: templates
+    order: 500
+
+    templates:
+      # index templates
+      #
+      index:
+        main_index:
+          label: メイン・インデックス
+          outfile: index.html
+          rebuild_me: 1
+        archive_index:
+          label: アーカイブ・インデックス
+          outfile: archives/index.html
+          rebuild_me: 1
+        styles:
+          label: CSS
+          outfile: styles.css
+          rebuild_me: 1
+        atom:
+          label: Atom
+          outfile: atom.xml
+          rebuild_me: 1
+        javascript:
+          label: JavaScript
+          outfile: mt.js
+          rebuild_me: 1
+        rsd:
+          label: RSD
+          outfile: rsd.xml
+          rebuild_me: 1
+        rss:
+          label: RSS
+          outfile: rss.xml
+          rebuild_me: 1
+
+      # archive templates
+      #
+      page:
+         archives/webpage:
+          label: ウェブページ
+          mappings:
+            page_archive:
+              archive_type: Page
+              file_template: %-c/%-f
+      individual:
+        archives/entry:
+          label: ブログ記事
+          mappings:
+            entry_archive:
+              archive_type: Individual
+              file_template: %y%m/%-f
+      archive:
+        archives/entry_list:
+          label: ブログ記事リスト
+          mappings:
+            monthly:
+              archive_type: Monthly
+              file_template: %y%m/%i
+            category:
+              archive_type: Category
+              file_template: %-c/%i
+
+      # template modules
+      #
+      module:
+        modules/module_category:
+          label: module_category
+        modules/module_comment:
+          label: module_comment
+        modules/module_header:
+          label: module_header
+        modules/module_meta:
+          label: module_meta
+        modules/module_monthly:
+          label: module_monthly
+        modules/module_photogallery:
+          label: module_photogallery
+        modules/module_recent:
+          label: module_recent
+        modules/module_search:
+          label: module_search
+        modules/module_sitedata:
+          label: module_sitedata
+        modules/module_tagcloud:
+          label: module_tagcloud
+        modules/module_commonvar:
+          label: module_commonvar
+        modules/webpage_detail:
+          label: ウェブページの詳細
+        modules/parts_category:
+          label: カテゴリ
+        modules/comment:
+          label: コメント
+        modules/comment_form:
+          label: コメント入力フォーム
+        modules/comment_detail:
+          label: コメント詳細
+        modules/entry_tags:
+          label: タグ
+        modules/trackback:
+          label: トラックバック
+        modules/footer:
+          label: フッター
+        modules/entry_meta:
+          label: ブログ記事のメタデータ
+        modules/archivelist_detail:
+          label: ブログ記事の概要
+        modules/entry_detail:
+          label: ブログ記事の詳細
+
+      # system templates
+      #
+      system:
+        comment_preview:
+          label: Comment Preview
+        comment_response:
+          label: Comment Response
+        dynamic_error:
+          label: Dynamic Error
+        popup_image:
+          label: Popup Image
+        search_results:
+          label: Search Results

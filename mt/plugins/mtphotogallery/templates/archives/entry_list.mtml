@@ -1,0 +1,109 @@
+<MTSetVarBlock name="page_title"><$MTArchiveTitle$> アーカイブ</MTSetVarBlock>
+<MTSetVarBlock name="title"><$MTGetVar name="page_title"$> - <$MTBlogName encode_html="1"$></MTSetVarBlock>
+<MTSetVarBlock name="html_head">
+<MTIf name="datebased_archive">
+	<MTSetVarBlock name="html_head">
+	<MTArchivePrevious><link rel="prev" href="<$MTArchiveLink$>" title="<$MTArchiveTitle encode_html="1"$>" /></MTArchivePrevious>
+	<MTArchiveNext><link rel="next" href="<$MTArchiveLink$>" title="<$MTArchiveTitle encode_html="1"$>" /></MTArchiveNext>
+	</MTSetVarBlock>
+</MTIf>
+</MTSetVarBlock>
+<MTIfCommentsAccepted><$MTSetVar name="body_onload" value="individualArchivesOnLoad(commenter_name)"$></MTIfCommentsAccepted>
+<$mt:Include module="module_meta"$>
+
+<title><$MTGetVar name="title"$></title>
+<meta name="description" content="<MTIf name="archive_class" eq="category-archive"><$MTCategoryDescription$></MTIf><MTIf name="archive_class" eq="datebased-monthly-archive"><$MTArchiveTitle$>のエントリー一覧です。</MTIf>" />
+<meta name="keywords" content="<$MTArchiveTitle$>,<MTEntries lastn="3"><MTEntryTags glue=","><$MTTagName$></MTEntryTags></MTEntries>" />
+<$mt:var name="html_head"$>
+</head>
+<body>
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<div id="center">
+<div class="content">
+
+
+<MTIf name="archive_class" eq="category-archive">
+	<MTEntries>
+	<$MTInclude module="ブログ記事の概要"$>
+	</MTEntries>
+</MTIf>
+
+
+
+<MTIf name="archive_class" eq="datebased-monthly-archive">
+<mt:IfArchiveTypeEnabled archive_type="Individual">
+<div class="module-calendar">
+<h3><$MTArchiveDate format="%B %Y"$></h3>
+	<div class="calendar">
+	<table summary="リンク付きカレンダー">
+	<tr>
+		<th abbr="日曜日">日</th>
+		<th abbr="月曜日">月</th>
+		<th abbr="火曜日">火</th>
+		<th abbr="水曜日">水</th>
+		<th abbr="木曜日">木</th>
+		<th abbr="金曜日">金</th>
+		<th abbr="土曜日">土</th>
+	</tr>
+<mt:Calendar month="this">
+	<mt:CalendarWeekHeader><tr></mt:CalendarWeekHeader>
+		<td>
+		<mt:CalendarIfEntries>
+			<mt:Entries lastn="1">
+			<MTEntryAssets type="image" lastn="1">
+			<span class="calimg"><a href="<$mt:EntryPermalink$>" title="<$MTAssetLabel$>"><img src="<$MTAssetThumbnailURL width="80"$>" alt="<$MTAssetLabel$>" /></a></span>
+			</MTEntryAssets>
+			</mt:Entries>
+		</mt:CalendarIfEntries>
+		<mt:CalendarIfNoEntries><$mt:CalendarDay$></mt:CalendarIfNoEntries>
+				<mt:CalendarIfBlank> - </mt:CalendarIfBlank>
+		</td>
+	<mt:CalendarWeekFooter></tr></mt:CalendarWeekFooter>
+</mt:Calendar>
+	</table>
+	</div>
+</div>
+</mt:IfArchiveTypeEnabled>
+</MTIf>
+
+
+<p class="content-nav">
+<MTArchivePrevious><a href="<$MTArchiveLink$>">&laquo; <$MTArchiveTitle$></a>｜</MTArchivePrevious>
+<MTArchiveNext>｜<a href="<$MTArchiveLink$>"><$MTArchiveTitle$> &raquo;</a></MTArchiveNext>
+</p>
+
+<p class="totop"><a href="#header">ページトップへ</a>
+</div></div>
+
+
+
+<div id="right-side">
+
+
+<div id="module-archive-list">
+<div class="module-content">
+<h4>Item Lists</h4><MTEntries limit="auto">
+<MTEntriesHeader><dl></MTEntriesHeader>
+<dt><$MTEntryTitle$></dt>
+<MTEntryAssets><dd><a href="<$MTEntryPermalink$>" title="<$MTAssetLabel$>"><$MTAssetLabel$></a></dd></MTEntryAssets>
+<MTEntriesFooter></dl></MTEntriesFooter>
+</MTEntries>
+</div></div>
+
+
+</div><!-- right-side end -->
+
+
+</div></div><!--main end -->
+
+
+
+<$mt:Include module="フッター"$>
+</body>
+</html>

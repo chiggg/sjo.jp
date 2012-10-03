@@ -1,0 +1,41 @@
+<MTSetVar name="body_onload" value="individualArchivesOnLoad(commenter_name)">
+<MTSetVar name="system_template" value="1">
+<MTSetVar name="comment_preview_template" value="1">
+<MTSetVar name="feedback_template" value="1">
+<MTSetVarBlock name="page_title"><$MTEntryTitle$>へのコメント</MTSetVarBlock>
+<MTSetVarBlock name="title"><$MTBlogName encode_html="1"$>: <$MTGetVar name="page_title"$></MTSetVarBlock>
+<MTSetVarBlock name="html_head"><script type="text/javascript" src="<$MTLink template="javascript"$>"></script></MTSetVarBlock>
+<$mt:Include module="module_meta"$>
+<$mt:var name="html_head"$>
+<title><$MTGetVar name="title"$></title>
+
+</head>
+<body>
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<div id="center">
+<div class="content">
+<h2>コメントの確認</h2>
+
+<$MTInclude module="コメント詳細"$>
+
+<$MTInclude module="コメント"$>
+</div>
+</div>
+
+</div></div><!-- main end -->
+
+
+<$mt:Include module="フッター"$>
+<script type="text/javascript">
+<!--
+individualArchivesOnLoad(commenter_name);
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+
+<h3><MT_TRANS phrase="Choose an album to upload into"></h3>
+
+<p>
+<TMPL_IF NAME=SETS>
+<select name="set_id" id="set_id">
+<TMPL_LOOP NAME=SETS>
+<option value="<TMPL_VAR NAME=SET_ID>"<TMPL_IF NAME=SET_SELECTED> selected="selected"</TMPL_IF>><TMPL_VAR NAME=SET_NAME ESCAPE=HTML></option>
+</TMPL_LOOP>
+</select>
+&nbsp;&nbsp;
+</TMPL_IF>
+<a href="<TMPL_VAR NAME=SCRIPT_URL>?__mode=new_album"><MT_TRANS phrase="Create a new album"></a>
+</p>
+
+<script type="text/javascript" language="javascript">
+<!--
+
+var setURLs = new Array();
+<TMPL_LOOP NAME=SETS>
+setURLs['<TMPL_VAR NAME=SET_ID>'] = '<TMPL_VAR NAME=SET_URL ESCAPE=HTML>';
+</TMPL_LOOP>
+
+function OnBack() {
+	document.location.href = '<TMPL_VAR NAME=SCRIPT_URL>';
+}
+
+function OnNext() {
+	var xml = window.external.Property("TransferManifest");
+	var files = xml.selectNodes("transfermanifest/filelist/file");
+	
+	var el = document.getElementById('set_id');
+	var setID = el.options[el.selectedIndex].value;
+	var finalURL = setURLs[setID];
+
+	for (i = 0; i < files.length; i++) {
+		var postTag = xml.createNode(1, "post", "");
+		postTag.setAttribute("href", '<TMPL_VAR NAME=SCRIPT_FULL_URL>');
+		postTag.setAttribute("name", "photo");
+		
+		add_param(xml, postTag, '__mode', 'upload');
+		add_param(xml, postTag, 'set_id', setID);
+
+		files.item(i).appendChild(postTag);
+	}
+
+	var uploadTag = xml.createNode(1, "uploadinfo", "");
+	var htmluiTag = xml.createNode(1, "htmlui", "");
+	htmluiTag.text = finalURL;
+	uploadTag.appendChild(htmluiTag);
+	xml.documentElement.appendChild(uploadTag);
+
+	window.external.FinalNext();
+}
+
+function OnCancel() {
+	alert('OnCancel');
+}
+
+function add_param(xml, parent, name, value) {
+	var dataTag = xml.createNode(1, "formdata", "");
+	dataTag.setAttribute("name", name);
+	dataTag.text = value;
+	parent.appendChild(dataTag);
+}
+
+window.external.SetWizardButtons(true, <TMPL_IF NAME=SETS>true<TMPL_ELSE>false</TMPL_IF>, false);
+window.external.SetHeaderText('Upload photos to TypePad', 'Select an album');
+window.external.Caption = 'Upload photos to TypePad';
+
+//-->
+</script>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

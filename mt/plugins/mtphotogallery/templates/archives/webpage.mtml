@@ -1,0 +1,85 @@
+<$MTSetVar name="page_archive" value="1"$>
+<MTSetVarBlock name="page_title"><$MTPageTitle$></MTSetVarBlock>
+<MTSetVarBlock name="title"><$MTGetVar name="page_title"$> - <$MTBlogName encode_html="1"$></MTSetVarBlock>
+<MTSetVarBlock name="html_head">
+    <MTIfPingsAccepted><$MTEntryTrackbackData$></MTIfPingsAccepted>
+    <MTIfCommentsAccepted><script type="text/javascript" src="<$MTLink template="javascript"$>"></script></MTIfCommentsAccepted>
+</MTSetVarBlock>
+<MTIfCommentsAccepted><$MTSetVar name="body_onload" value="individualArchivesOnLoad(commenter_name)"$></MTIfCommentsAccepted>
+<$mt:Include module="module_meta"$>
+
+<title><$MTGetVar name="title"$></title>
+<meta name="description" content="<$MTPageExcerpt convert_breaks="0"$>" />
+<meta name="keywords" content="<$MTPageKeywords$>" />
+<$mt:var name="html_head"$>
+</head>
+<body>
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<div id="center">
+<div class="content">
+
+
+<$MTInclude module="ウェブページの詳細"$>
+
+<$MTInclude module="トラックバック"$>
+
+<$MTInclude module="コメント"$>
+
+
+<p class="totop"><a href="#header">ページトップへ</a>
+</div></div>
+
+
+
+<div id="right-side">
+
+
+<mt:IfArchiveTypeEnabled archive_type="Page">
+<div id="module-pageweb">
+<h4>Web Pages</h4>
+	<div class="module-content">
+	<mt:Pages no_folder="1" sort_by="title" sort_order="ascend">
+	<mt:PagesHeader><ul></mt:PagesHeader>
+		<li><a href="<$mt:PagePermalink$>" title="<$mt:PageTitle$>"><$mt:PageTitle$></a></li>
+	<mt:PagesFooter></ul></mt:PagesFooter>
+	</mt:Pages>
+
+<mt:TopLevelFolders>
+	<mt:FolderHeader><ul></mt:FolderHeader>
+	<li><$mt:FolderLabel$>
+		<mt:Pages sort_by="title" sort_order="ascend">
+			<mt:PagesHeader><ul></mt:PagesHeader>
+			<li><a href="<$mt:PagePermalink$>" title="<$mt:PageTitle$>"><$mt:PageTitle$></a></li>
+			<mt:PagesFooter></ul></mt:PagesFooter>
+		</mt:Pages>
+			<$mt:SubFolderRecurse$>
+			</li>
+			<mt:FolderFooter></ul></mt:FolderFooter>
+</mt:TopLevelFolders>
+</div>
+</div>
+</mt:IfArchiveTypeEnabled>
+
+
+</div><!-- right-side end -->
+
+</div></div><!--main end -->
+
+
+
+<$mt:Include module="フッター"$>
+<MTIfCommentsAccepted>
+<script type="text/javascript">
+<!--
+individualArchivesOnLoad(commenter_name);
+//-->
+</script>
+</MTIfCommentsAccepted>
+</body>
+</html>

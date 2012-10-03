@@ -1,0 +1,46 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+
+<h3><MT_TRANS phrase="Create a new photo album"></h3>
+
+<form method="post" action="<TMPL_VAR NAME=SCRIPT_URL>" id="createform">
+<input type="hidden" name="__mode" value="create_album" />
+
+<p>
+<label for="set_name"><MT_TRANS phrase="Album name:"></label> <input name="set_name" id="set_name" onchange="handleChange()" onkeyup="handleChange()" />
+</p>
+
+<p>
+<MT_TRANS phrase="Make this album public?"><br />
+<label><input type="radio" name="set_is_public" value="1" checked="checked" /><MT_TRANS phrase="Yes"></label>&nbsp;&nbsp;
+<label><input type="radio" name="set_is_public" value="0" /><MT_TRANS phrase="No"></label>
+</p>
+
+<script type="text/javascript" language="javascript">
+<!--
+
+function handleChange() {
+	var name = document.getElementById('set_name').value;
+	var can_submit = (name != '') && (name != undefined);
+	window.external.SetWizardButtons(true, can_submit, false);
+}
+
+function OnBack() {
+	document.location.href = '<TMPL_VAR NAME=SCRIPT_FULL_URL>?__mode=ready';
+}
+
+function OnNext() {
+	document.getElementById('createform').submit();
+}
+
+function OnCancel() {
+	alert('OnCancel');
+}
+
+window.external.SetWizardButtons(true, false, false);
+window.external.SetHeaderText('Upload photos to TypePad', 'Create a new album');
+window.external.Caption = 'Upload photos to TypePad';
+
+//-->
+</script>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

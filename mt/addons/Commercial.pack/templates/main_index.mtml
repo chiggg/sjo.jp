@@ -1,0 +1,15 @@
+<MTSetVar name="body_class" value="mt-main-index">
+<MTSetVar name="page_layout" value="layout-wm">
+<MTSetVar name="main_template" value="1">
+<MTSetVar name="main_index" value="1">
+<MTSetVar name="sidebar" value="1">
+<MTSetVarBlock name="title"><$MTBlogName encode_html="1"$></MTSetVarBlock>
+
+<$MTInclude module="<__trans phrase="Header">"$>
+
+<mt:Pages tag="@home" lastn="1">
+<h1 id="page-title" class="asset-name"><mt:PageTitle /></h1>
+<mt:PageBody />
+</mt:Pages>
+
+<$MTInclude module="<__trans phrase="Footer">"$>

@@ -1,0 +1,57 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+
+<p><MT_TRANS phrase="Please enter your TypePad login details."></p>
+
+<form method="post" action="<TMPL_VAR NAME=SCRIPT_URL>" id="loginform">
+
+<table>
+	<tr>
+		<td><MT_TRANS phrase="Username:"></td>
+		<td><input type="text" name="username" value="" id="username" onchange="handleChange()" onkeyup="handleChange()" /></td>
+	</tr>
+	<tr>
+		<td><MT_TRANS phrase="Password:"></td>
+		<td><input type="password" name="password" value="" id="password" onchange="handleChange()" onkeyup="handleChange()" /></td>
+	</tr>
+</table>
+
+</form>
+
+<p><a href="<TMPL_VAR NAME=SCRIPT_BASE_URL>/register" target="_blank"><MT_TRANS phrase="Not a member yet?"></a></p>
+<p><a href="<TMPL_VAR NAME=SCRIPT_BASE_URL>?__mode=start_recover&portal=<TMPL_VAR NAME=SITE_PORTAL>" target="_blank"><MT_TRANS phrase="Forgot your password?"></a></p>
+
+<script type="text/javascript" language="javascript">
+<!--
+
+function handleChange() {
+	var username = document.getElementById('username').value;
+	var password = document.getElementById('password').value;
+
+	var username_ok = (username != '') && (username != undefined);
+	var password_ok = (password != '') && (password != undefined);
+
+	var can_submit = username_ok && password_ok;
+
+	window.external.SetWizardButtons(true, can_submit, false);
+}
+
+function OnBack() {
+	window.external.FinalBack();
+}
+
+function OnNext() {
+	document.getElementById('loginform').submit();
+}
+
+function OnCancel() {
+	alert('OnCancel');
+}
+
+window.external.SetWizardButtons(true, false, false);
+window.external.SetHeaderText('Upload photos to TypePad', 'Login with your TypePad account');
+window.external.Caption = 'Upload photos to TypePad';
+
+//-->
+</script>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

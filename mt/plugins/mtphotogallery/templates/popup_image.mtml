@@ -1,0 +1,30 @@
+<MTSetVarBlock name="page_title">画像ポップアップ</MTSetVarBlock>
+<MTSetVarBlock name="title"><$MTGetVar name="page_title"$>：<$MTBlogName encode_html="1"$></MTSetVarBlock>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title><$MTGetVar name="title"$></title>
+
+<style type="text/css">
+<!--
+#popup-container {
+	text-align: center;
+	margin: 0px auto;
+}
+#popup-container img {
+	border-width: 0;
+	border-style: none;
+}
+-->
+</style>
+
+</head>
+<body>
+<div id="popup-container">
+<p><a href="JavaScript:window.close()">
+<img src="<$MTImageURL$>" width="<$MTImageWidth$>" height="<$MTImageHeight$>" />
+</a></p>
+<p>画像クリックでウィンドウを閉じます。</p>
+<noscript>JavaScriptを無効にしていると、上記の ウィンドウを閉じる 動作は働きません。</noscript>
+</div>
+</body>
+</html>

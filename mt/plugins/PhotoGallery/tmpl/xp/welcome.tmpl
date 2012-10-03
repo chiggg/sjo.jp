@@ -1,0 +1,31 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+
+<h1><MT_TRANS phrase="Welcome Back, [_1]" params="<TMPL_VAR NAME=USER_FIRST_NAME ESCAPE=HTML>" escape="html"></h1>
+
+<p><MT_TRANS phrase="If this is you, click the Next button below."></p>
+
+<p><MT_TRANS phrase="If you would like to login as someone else, "><a href="<TMPL_VAR NAME=SCRIPT_URL>?__mode=logout"><MT_TRANS phrase="click here"></a>.
+
+<script type="text/javascript" language="javascript">
+<!--
+
+function OnBack() {
+	window.external.FinalBack();
+}
+
+function OnNext() {
+	document.location.href = '<TMPL_VAR NAME=SCRIPT_URL>?__mode=ready';
+}
+
+function OnCancel() {
+	alert('OnCancel');
+}
+
+window.external.SetWizardButtons(true, true, false);
+window.external.SetHeaderText('Upload photos to TypePad', 'Verify your TypePad account');
+window.external.Caption = 'Upload photos to TypePad';
+
+//-->
+</script>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

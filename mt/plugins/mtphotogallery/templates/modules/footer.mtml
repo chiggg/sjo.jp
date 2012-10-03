@@ -1,0 +1,30 @@
+<MTUnless name="system_template">
+<div id="left-side-out"><div id="left-side"><div class="left-side-inner">
+<$mt:Include module="module_recent"$>
+<$mt:Include module="module_monthly"$>
+
+<mt:if name="archive_index">
+<$mt:Include module="module_sitedata"$>
+<mt:else><$mt:Include module="module_comment"$></mt:else>
+</mt:if>
+</div></div></div>
+</MTUnless>
+
+
+<div class="footer">
+
+<div class="breadcrumb-under">
+<$mt:Include module="module_category"$>
+</div>
+
+<p>
+Copyright ＠2008 Example All Rights Reserved.
+｜<img src="<$mt:StaticWebPath$>images/status_icons/feed.gif" alt="購読する" width="9" height="9" /><a href="<$MTLink template="atom"$>">ATOM</a>
+｜<img src="<$mt:StaticWebPath$>images/status_icons/feed.gif" alt="購読する" width="9" height="9" /><a href="<$MTLink template="rss"$>">RSS</a>
+｜<a href="<$MTLink template="archive_index"$>">ARCHIVES</a>
+<a href="http://www.sixapart.jp/movabletype/">
+<img src="<$MTStaticWebPath$>images/mt4-bug-pbmt-white.png" alt="Powered by Movable Type <$MTVersion$>" width="120" height="75" /></a>
+</p>
+</div>
+
+</div></div><mt:ignore><!-- container end --></mt:ignore>

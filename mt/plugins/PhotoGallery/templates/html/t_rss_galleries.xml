@@ -1,0 +1,41 @@
+<MTCollateCollect>
+  <MTCategories><MTFilterCategories exclude="Favorites">
+    <MTKeyValues source="[MTCategoryDescription]">
+    <MTIfNoKeyExists key="hidden">
+    <MTCollateRecord>
+      <MTCollateSetField name="title"><MTIfKeyExists key="title"><$MTKeyValue key="title"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel$></MTIfNoKeyExists></MTCollateSetField>
+      <MTCollateSetField name="link"><$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/</MTCollateSetField>
+      <MTCollateSetField name="desc"><p>(<em><$MTCategoryCount$> photos</em>)<MTIfNonEmpty tag="MTCategoryDescription"> <$MTKeyValuesStripped smarty_pants="1" remove_html="1"$><MTElse>No description</MTElse></MTIfNonEmpty></p><p>Most recent photo from: <MTEntries lastn="1"><$MTEntryDate format="%e %B %Y"$></MTEntries></p><p><strong>Last 5 photos:</strong></p><p><MTEntries lastn="5" sort_order="descend"><a href="<$MTEntryLink$>"><$MTEntryMore$></a> </MTEntries></p><p><a href="<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/gallery/">View gallery</a></p></MTCollateSetField>
+      <MTCollateSetField name="count"><$MTCategoryCount$> photos</MTCollateSetField>
+      <MTCollateSetField name="date"><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></MTCollateSetField>
+      <MTCollateSetField name="sortdate"><MTEntries lastn="1"><$MTEntryDate format="%Y-%m-%d-%H-%M-%S"$></MTEntries></MTCollateSetField>
+    </MTCollateRecord>
+    </MTIfNoKeyExists>
+    </MTKeyValues>
+  </MTFilterCategories></MTCategories>
+</MTCollateCollect><?xml version="1.0" encoding="<$MTPublishCharset$>"?>
+
+<rss version="2.0">
+<channel>
+<title><$MTBlogName remove_html="1" encode_xml="1"$>: Galleries</title>
+<link><$MTBlogURL$></link>
+<description><$MTBlogDescription remove_html="1" encode_xml="1"$></description>
+<copyright>Copyright <$MTDate format="%Y"$></copyright>
+<lastBuildDate><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></lastBuildDate>
+<generator>http://www.movabletype.org/?v=<$MTVersion$></generator>
+<docs>http://blogs.law.harvard.edu/tech/rss</docs> 
+
+<MTCollateList limit="10 sortdate:-" sort="sortdate:-">
+<item>
+<title><$MTCollateField name="title" remove_html="1" encode_xml="1"$></title>
+<description><$MTCollateField name="desc" encode_xml="1"$></description>
+<link><$MTCollateField name="link" encode_xml="1"$></link>
+<guid><$MTCollateField name="link" encode_xml="1"$></guid>
+<category><$MTCollateField name="count" remove_html="1" encode_xml="1"$></category>
+<pubDate><$MTCollateField name="date"$></pubDate>
+</item>
+</MTCollateList>
+
+</channel>
+</rss>
+

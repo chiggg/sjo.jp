@@ -1,0 +1,73 @@
+<?php
+  // Page Variables
+  $pgtitle = "Gallery Archive";
+  $section = "archive";
+  $blogrelurl = "<$MTBlogRelativeURL$>";
+  $blogurl = "<$MTBlogURL$>";
+  $staticurl = "<$MTStaticWebPath$>";
+  
+  // Functions
+  include ("<$MTStaticFilePath$>plugins/PhotoGallery/meta/functions/all.php");
+  
+  DocHead();
+  ContentOpen();
+?>
+
+<h1><?= $pgtitle ?></h1>
+
+<$MTSetVar name="galleryno" value="0"$>
+<MTCollateCollect>
+  <MTCategories><MTFilterCategories exclude="Favorites">
+    <MTKeyValues source="[MTCategoryDescription]">
+    <MTIfNoKeyExists key="hidden">
+    <MTCollateRecord>
+      <MTEntries lastn="1">
+        <MTCollateSetField name="sortdate"><$MTEntryDate format="%Y-%m-%d-%H-%M-%S"$></MTCollateSetField>
+        <MTCollateSetField name="date"><$MTEntryDate format="%b %Y"$></MTCollateSetField>
+        <MTCollateSetField name="img"><$MTEntryMore$></MTCollateSetField>
+      </MTEntries>
+      <MTSetVarBlock name="titleimgid"><MTKeyValue key="titleimgid"></MTSetVarBlock>
+      <MTIfKeyExists key="titleimgid"><MTEntries id="$titleimgid"><MTCollateSetField name="img"><$MTEntryMore$></MTCollateSetField></MTEntries></MTIfKeyExists>
+      <MTCollateSetField name="path"><$MTCategoryLabel dirifyplus="pld"$></MTCollateSetField>
+      <MTCollateSetField name="title"><MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists></MTCollateSetField>
+      <MTCollateSetField name="count"><$MTCategoryCount$></MTCollateSetField>
+      <MTCollateSetField name="desc"><MTIfNonEmpty tag="MTKeyValuesStripped"><MTFirstNWords n="20" append="&#8230;" append_decode_html="1"><$MTKeyValuesStripped smarty_pants="1" remove_html="1"$></MTFirstNWords><MTElse><em>No description</em></MTElse></MTIfNonEmpty></MTCollateSetField>
+    </MTCollateRecord>
+      <$MTSetVar name="galleryno" op="add" value="1"$>
+    </MTIfNoKeyExists>
+    </MTKeyValues>
+  </MTFilterCategories></MTCategories>
+</MTCollateCollect>
+
+<div class="galleries useslides">
+  <h2>All galleries</h2>
+<MTIf name="galleryno" gt="0">
+<MTGrid num_columns="3"><MTCollateList sort="sortdate:-"><MTGridCell><?php $thisimg = '<MTCollateField name="img" encode_php="q">'; ?>
+<MTGridIfLeftColumn>
+  <ul>
+</MTGridIfLeftColumn>    <li>
+      <h3><a href="<$MTBlogArchiveURL relative_url="1"$><MTCollateField name="path">/"><MTCollateField name="title"></a></h3>
+      <a href="<$MTBlogArchiveURL relative_url="1"$><MTCollateField name="path">/" class="img<?php if (IsVertical($thisimg)) echo ' v'; ?>"><MTCollateField name="img"></a>
+      <p><em>(<MTCollateField name="count"> photos)</em> <MTCollateField name="desc"></p>
+      <p><MTCollateField name="date"></p>
+    </li>
+<MTGridIfRightColumn>  </ul>
+</MTGridIfRightColumn></MTGridCell></MTCollateList><MTGridTrailingCells><MTGridIfRightColumn>  </ul></MTGridIfRightColumn></MTGridTrailingCells></MTGrid><MTElse><p>No galleries published yet.</p></MTElse></MTIf>
+</div>
+
+
+<div id="feeds">
+  <h2>Global Feeds</h2>
+  <ul>
+    <li><a href="<?= $blogurl ?>galleries/galleries.xml" title="RSS feed for recent galleries"><img src="<?= $blogrelurl ?>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Galleries</a></li>
+    <li><a href="<?= $blogurl ?>index.xml" title="RSS feed for recent photos"><img src="<?= $blogrelurl ?>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Photos</a></li>
+    <li><a href="<?= $blogurl ?>comments/comments.xml" title="RSS feed for recent comments"><img src="<?= $blogrelurl ?>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Comments</a></li>
+  </ul>
+</div>
+
+<?= ContentClose(); ?>
+
+<p id="path"><a href="<?= $blogrelurl ?>"><$MTBlogName smarty_pants="1"$></a> > <?= $pgtitle ?></p>  
+
+<?php  include ("<$MTStaticFilePath$>plugins/PhotoGallery/meta/templates/modules/mod_footer.html"); ?>
+<?= DocFoot(); ?>

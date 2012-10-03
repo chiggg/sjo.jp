@@ -1,0 +1,34 @@
+<MTSetVar name="body_class" value="mt-dynamic-error">
+<MTSetVar name="system_template" value="1">
+<MTSetVar name="dynamic_error_template" value="1">
+<MTSetVarBlock name="page_title">ページが見つかりません。</MTSetVarBlock>
+<MTSetVarBlock name="title"><$MTBlogName encode_html="1"$>: <$MTGetVar name="page_title"$></MTSetVarBlock>
+<$mt:Include module="module_meta"$>
+<title><$MTGetVar name="title"$></title>
+
+</head>
+<body>
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<div id="center">
+<div class="content">
+
+<h2><$MTGetVar name="page_title"$></h2>
+<blockquote>
+    <strong><$MTErrorMessage$></strong>
+</blockquote>
+
+</div>
+</div>
+
+</div></div><!-- main end -->
+
+
+<$mt:Include module="フッター"$>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<div class="contact-form" id="contact-form">
+        <form method="post" action="<$MTCGIPath$><$MTCommentScript$>" name="comments_form" id="comments-form" onsubmit="if (this.bakecookie.checked) rememberMe(this)">
+            <input type="hidden" name="static" value="1" />
+            <input type="hidden" name="entry_id" value="<$MTEntryID$>" />
+            <input type="hidden" name="__lang" value="<$MTBlogLanguage$>" />
+            <div id="contact-open-data">
+                <p>
+                    <label for="contact-author"><__trans phrase="Name"></label>
+                    <input id="contact-author" class="text" name="author" size="30" value="<MTIf name="comment_preview_template"><$MTCommentAuthor encode_html="1"$></MTIf>" />
+                </p>
+                <p>
+                    <label for="contact-email"><__trans phrase="Email Address"></label>
+                    <input id="contact-email" class="text" name="email" size="30" value="<MTIf name="comment_preview_template"><$MTCommentEmail encode_html="1"$></MTIf>" />
+                </p>
+                <p>
+                    <label for="contact-url"><__trans phrase="URL"></label>
+                    <input id="contact-url" class="text" name="url" size="30" value="<MTIf name="comment_preview_template"><$MTCommentURL encode_html="1"$></MTIf>" />
+                </p>
+            </div>
+            <div id="contact-open-text">
+                <label for="contact-text"><__trans phrase="Comments"></label>
+                <textarea id="contact-text" name="text" rows="15" cols="50"><MTIf name="comment_preview_template"><$MTCommentBody autolink="0" sanitize="0" convert_breaks="0" encode_html="1"$></MTIf></textarea>
+            </div>
+            <div id="contact-open-footer">
+                <input type="submit" accesskey="s" name="post" id="contact-submit" value="Submit" />
+            </div>
+        </form>
+</div>

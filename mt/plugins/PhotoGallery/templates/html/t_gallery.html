@@ -1,0 +1,43 @@
+<MTCategoryOfArchive><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTKeyValue key='title' smarty_pants='1']"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTArchiveTitle smarty_pants='1']"$></MTIfNoKeyExists><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><$MTGetVar2 name="gallerytitle"> > Gallery</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogRelativeURL$>meta/css/master.css" />
+  <MTIfKeyExists key="css"><link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus='pld'$>/<$MTKeyValue key="css"$>" /></MTIfKeyExists>
+</head>
+
+<body class="gallery">
+
+<!-- BEGIN #content -->
+<div id="content">
+
+<div class="galleryinfo">
+  <h1><$MTGetVar2 name="gallerytitle"></h1>
+  <p class="desc"><MTIfNonEmpty tag="MTKeyValuesStripped"><$MTKeyValuesStripped smarty_pants="1"$><MTElse><em>No description</em></MTElse></MTIfNonEmpty></p>
+<MTIfEqual a="[MTCategoryLabel]" b="Favorites">  <p class="desc"><strong>Note:</strong> <em>Clicking through to an individual photo will land you in the original gallery to which that image belongs. So clicking Next/Previous on those pages will navigate among that gallery, instead of going forward or back one favorite.</em></p></MTIfEqual>
+</div>
+
+<ul class="slides"><$MTSetVar2 name="favcount" value="0"$>
+<MTEntries><$MTSetVar name="useitem" value="1"$><MTIfEqual a="[MTArchiveTitle]" b="Favorites"><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="hidden"><$MTSetVar name="useitem" value="0"$></MTIfKeyExists></MTKeyValues></MTCategory></MTIfEqual><MTIfEqual a="[MTGetVar name='useitem']" b="1">
+  <li<MTIfNonEmpty tag="MTEntryKeywords"> class="<$MTEntryKeywords lower_case="1"$>"</MTIfNonEmpty>><a href="<$MTEntryLink relative_url="1"$>"<MTCollect tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect>><$MTEntryMore$></a></li>
+<$MTAddVar name="favcount" value="1"$></MTIfEqual></MTEntries>
+</ul>
+
+<div class="galleryinfo">
+  <p>Subscribe to updates: <a href="feed:<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/index.xml" title="RSS feed for <$MTGetVar2 name="gallerytitle">" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></p>
+  <p><em><$MTGetVar2 name="favcount"$> photos</em></p>
+</div>
+
+</div>
+<!-- END #content -->
+
+<p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName smarty_pants="1"$></a> > <MTIfEqual a="[MTArchiveTitle]" b="Favorites">Favorites<MTElse><a href="<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/"><$MTGetVar2 name="gallerytitle"></a> > Gallery</MTElse></MTIfEqual></p>  
+
+<$MTInclude module="Footer"$>
+
+</body>
+</html></MTKeyValues></MTCategoryOfArchive>

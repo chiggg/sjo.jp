@@ -1,0 +1,40 @@
+<?php
+<$MTInclude module="Photo Macro"$>
+<MTCategoryOfArchive><MTKeyValues source="[MTCategoryDescription]">
+  <MTEntries lastn="1"><MTSetVarBlock name="titleimg"><mt:getvar name="photo" max_size="480"></MTSetVarBlock></MTEntries><MTIfKeyExists key="titleimgid"><MTEntries id="[MTKeyValue key='titleimgid']"><MTSetVarBlock name="titleimg"><mt:getvar name="photo" max_size="480"></MTSetVarBlock></MTEntries></MTIfKeyExists>
+  
+  // Page Variables
+  include ("galleryinfo.php");
+  $pgtitle = $gallerytitle;
+  $section = "title auto";
+  $blogrelurl = "<$MTBlogRelativeURL$>";
+  $blogurl = "<$MTBlogURL$>";
+  $img = '<$MTGetVar name="titleimg" encode_php="q"$>';
+  $staticurl = "<$MTStaticWebPath$>";
+    
+  // Functions
+  include ("<$MTStaticFilePath$>plugins/PhotoGallery/meta/functions/all.php");
+  
+  DocHead();
+  ContentOpen();
+?>
+
+  <div id="titleimg"><a href="gallery/"><$MTGetVar name="titleimg"$></a></div>
+  
+  <div id="gallerydesc">
+  <h1><?= $pgtitle ?></h1>
+  <p><?= $gallerydesc ?></p>
+  <p>Updated: <MTEntries lastn="1"><$MTEntryDate format="%B %Y"$></MTEntries></p>
+  <p>(<em><$MTCategoryCount$> photos</em>)
+    <a href="<?= $fullgalleryurl ?>index.xml" class="i"><img src="<?= $blogrelurl ?>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></p>
+  <p><a href="gallery/" class="i"><img src="<?= $blogrelurl ?>meta/img/btn_view_gallery.gif" alt="View gallery" width="97" height="21" /></a></p>
+  </div>
+
+<?= ContentClose(); ?>
+
+<p id="path"><a href="<?= $blogrelurl ?>"><$MTBlogName smarty_pants="1"$></a> > <?= $gallerytitle; ?></p>  
+
+</MTKeyValues></MTCategoryOfArchive>
+
+<MTInclude name="Footer">
+<?= DocFoot(); ?>

@@ -1,0 +1,47 @@
+<h2 id="entry-<$MTEntryID$>"><a href="<$MTEntryPermalink$>"><$MTEntryTitle$></a></h2>
+
+<div class="entry-content">
+
+	<MTIfNonEmpty tag="EntryBody">
+	<div class="entry-more">
+	<$MTEntryBody$>
+	</div>
+	</MTIfNonEmpty>
+
+<MTIfTagSearch>
+<$MTInclude module="タグ"$>
+</MTIfTagSearch>
+
+<MTIfNonEmpty tag="EntryMore">
+<p class="entry-more-link">
+<a rel="bookmark" href="<$MTEntryPermalink$>#more"><$MTEntryTitle$></a>の続きを読む
+</p>
+</MTIfNonEmpty>
+
+
+<$MTInclude module="ブログ記事のメタデータ"$>
+</div>
+
+
+
+<mt:ignore>カテゴリー・アーカイブでの表示パターンB
+<MTEntryAssets>
+<div class="photo-detail">
+<div class="photo-detail-inner">
+<h2><a href="<MTEntryPermalink>" title="<$MTEntryTitle$>"><$MTEntryTitle$></a></h2>
+<p><$MTAssetDescription$></p>
+<h3><$MTAssetLabel$></h3>
+<dl>
+<dt>ファイルサイズ：</dt>
+<dd><$MTAssetProperty property="file_size"$></dd>
+<dt>イメージ幅：</dt>
+<dd><$MTAssetProperty property="image_width"$></dd>
+<dt>イメージ高さ：</dt>
+<dd><$MTAssetProperty property="image_height"$></dd>
+</dl>
+</div>
+
+<a href="<$MTAssetURL$>"><img src="<$MTAssetThumbnailURL width="180"$>" alt="<$MTAssetLabel$>" /></a>
+</div>
+</MTEntryAssets>
+カテゴリー・アーカイブでの表示パターンB ここまで</mt:ignore>

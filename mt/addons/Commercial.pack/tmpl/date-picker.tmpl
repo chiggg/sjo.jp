@@ -1,0 +1,15 @@
+        <span class="date-time-fields">
+<mt:if var name="options" ne="time">
+            <input id="d_<mt:var name="field_name">" class="entry-date" name="d_<mt:var name="field_name">" tabindex="10" value="<mt:var name="date" escape="html">" />
+    <mt:unless name="simple">
+            <a href="javascript:void(0);" mt:command="open-calendar-xxx_<mt:var name="field_name">" class="date-picker" title="<__trans_section component="commercial"><__trans phrase="Select date"></__trans_section>"><span>Choose Date</span></a>
+    </mt:unless>
+<mt:else>
+            <input type="hidden" id="d_<mt:var name="field_name">" name="d_<mt:var name="field_name">" value="" />
+</mt:if>
+<mt:if var name="options" ne="date">
+            <input class="entry-time" name="t_<mt:var name="field_name">" tabindex="11" value="<$mt:var name="time" escape="html"$>" />
+<mt:else>
+            <input type="hidden" id="t_<mt:var name="field_name">" name="t_<mt:var name="field_name">" value="" />
+</mt:if>
+        </span>

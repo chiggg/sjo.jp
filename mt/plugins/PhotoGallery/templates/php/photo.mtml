@@ -1,0 +1,103 @@
+<?php
+<$MTInclude module="Photo Macro"$>
+  // Page Variables
+  include ("../galleryinfo.php");
+  $blogrelurl = "<$MTBlogRelativeURL$>";
+  $blogurl = "<$MTBlogURL$>";
+  $staticurl = "<$MTStaticWebPath$>";
+  $section = "photosolo";
+  $pgtitle = "<$MTEntryTitle smarty_pants="1"$>";
+  $entryid = <$MTEntryID$>;
+  $img = '<$MTGetVar name="photo" max_size="480" encode_php="q"$>';
+<MTEntryIfCommentsOpen>  $opencomments = true;</MTEntryIfCommentsOpen>
+  
+  // Functions
+  include ("<$MTStaticFilePath$>plugins/PhotoGallery/meta/functions/all.php");
+  
+  DocHead();
+  ContentOpen();
+?>
+
+<div id="desc">
+  <h1><$MTEntryTitle smarty_pants="1"$></h1>
+  <p><MTIfNonEmpty tag="MTEntryExcerpt"><$MTEntryExcerpt smarty_pants="1"$><MTElse><em>No description</em></MTElse></MTIfNonEmpty></p>
+</div>
+
+<div id="main">
+  <p id="photo"><?= $img ?></p>
+  <div id="meta">
+    <ul>
+      <li class="count">Photo <?= CatOrder($entryids, $entryid) ?> of <?= $gallerycount ?></li>
+      <li class="date"><$MTEntryDate format="%e %B %Y"$></li>
+      <MTIfNonEmpty tag="MTEntryKeywords"><li class="tags"><$MTEntryKeywords$></li></MTIfNonEmpty>
+    </ul>
+  </div>
+
+<MTEntryIfAllowComments>
+<!-- BEGIN #commentblock -->
+<div id="commentblock">
+
+  <h2><MTIf tag="MTEntryCommentCount" gt="0"><$MTEntryCommentCount$> comment<MTIf tag="MTEntryCommentCount" ne="1">s</MTIf><MTEntryIfCommentsOpen> so far</MTEntryIfCommentsOpen> <a href="#comments" id="showcomments"><img src="<?= $blogrelurl ?>meta/img/btn_show.gif" width="35" height="11" alt="SHOW" /></a> <a href="#content" id="hidecomments"><img src="<?= $blogrelurl ?>meta/img/btn_hide.gif" width="35" height="11" alt="HIDE" /></a> <MTElse>No comments yet</MTElse></MTIf></h2>
+  
+<MTIf tag="MTEntryCommentCount" gt="0">
+<!-- BEGIN #comments -->
+<div id="comments">
+
+  <dl class="commentlist">
+
+<MTComments>
+    <dt id="comment<$MTCommentOrderNumber$>">
+  <a href="#comment<$MTCommentOrderNumber$>" class="postno" title="Link to Comment <$MTCommentOrderNumber$>" id="cid-<$MTCommentID pad="1"$>"><$MTCommentOrderNumber$>.</a>
+  <em>On <$MTCommentDate format="%e %b %Y"$>, <$MTCommentAuthorLink$> wrote:</em>
+    </dt>
+    <dd>
+<$MTCommentBody smarty_pants="1"$>
+    </dd>
+
+</MTComments> </dl>
+</MTIf>
+
+
+<MTEntryIfCommentsOpen>
+<p class="mainbutton" id="addcommentbutton"><a href="#addcomment" class="btn"><img src="<?= $blogrelurl ?>meta/img/btn_add_a_comment.gif" alt="" width="116" height="21" /></a></p>
+
+<!-- BEGIN #addcomment -->
+<div id="addcomment">
+<h2>Add a comment</h2>
+<$MTSetVar name="static" value="1"$>
+<$MTSetVar name="preview" value="0"$>
+<$MTInclude module="Comment Fields"$>
+</div>
+<!-- END #addcomment -->
+<MTElse>
+<p class="sub">Comments now closed for this photo.</p>
+</MTElse></MTEntryIfCommentsOpen>
+
+<MTIf tag="MTEntryCommentCount" gt="0">
+</div>
+<!-- END #comments -->
+</MTIf>
+
+</div>
+<!-- END #commentblock -->
+</MTEntryIfAllowComments>
+
+</div>
+
+
+<MTEntryPreviousInCategory><div id="prev" class="slides"><?php $previmg = '<$MTGetVar name="photo" max_size="90" encode_php="q"$>'; ?>
+  <p class="<MTIfNonEmpty tag="MTEntryKeywords"><$MTEntryKeywords lower_case="1"$></MTIfNonEmpty>"><a href="<$MTEntryLink relative_url="1"$>"<?php if (IsVertical($previmg)) echo ' class="v"'; ?> accesskey="z"><$MTGetVar name="photo" max_size="90"$> <em>previous</em></a></p>
+</div></MTEntryPreviousInCategory>
+
+<MTEntryNextInCategory><div id="next" class="slides"><?php $nextimg = '<$MTGetVar name="photo" max_size="90" encode_php="q"$>'; ?>
+  <p class="<MTIfNonEmpty tag="MTEntryKeywords"><$MTEntryKeywords lower_case="1"$></MTIfNonEmpty>"><a href="<$MTEntryLink relative_url="1"$>"<?php if (IsVertical($nextimg)) echo ' class="v"'; ?> accesskey="x"><$MTGetVar name="photo" max_size="90"$> <em>next</em></a></p>
+</div></MTEntryNextInCategory>
+
+
+<?= ContentClose(); ?>
+
+<p id="path"><a href="<?= $blogrelurl ?>"><$MTBlogName smarty_pants="1"$></a> > <a href="<?= $galleryurl ?>"><?= $gallerytitle ?></a> > <a href="<?= $galleryurl ?>gallery/">Gallery</a> > <$MTEntryTitle smarty_pants="1"$></p>
+
+<MTInclude name="Footer">
+<!-- Entry ID: <$MTEntryID$> -->
+<?= DocFoot(); ?>

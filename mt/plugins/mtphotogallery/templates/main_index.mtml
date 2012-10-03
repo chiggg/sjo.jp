@@ -1,0 +1,28 @@
+<MTSetVar name="main_template" value="1">
+<MTSetVar name="main_index" value="1">
+<MTSetVarBlock name="title"><$MTBlogName encode_html="1"$></MTSetVarBlock>
+<$mt:Include module="module_meta"$>
+
+<title><$MTGetVar name="title"$></title>
+<meta name="description" content="<$MTBlogDescription$>" />
+<meta name="keywords" content="<MTTags top="7" glue=","><$MTTagName$></MTTags>" />
+
+</head>
+<body>
+<$mt:Include module="module_header"$>
+
+
+
+<div class="main">
+<div class="main-inner">
+
+<$mt:Include module="module_photogallery"$>
+<$mt:Include module="module_tagcloud"$>
+
+</div></div><!--main end -->
+
+
+
+<$mt:Include module="フッター"$>
+</body>
+</html>

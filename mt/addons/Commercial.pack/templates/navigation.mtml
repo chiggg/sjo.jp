@@ -1,0 +1,22 @@
+<__trans_section component="commercial">
+<ul>
+    <li class="first<mt:if name="main_index"> on</mt:if>"><a href="<mt:Link template="<__trans phrase="Main Index">">"><__trans phrase="Home"></a></li>
+    <li class="<mt:if name="blog_index"> on</mt:if>"><a href="<mt:BlogURL />blog/"><__trans phrase="Blog"></a></li>
+    
+    <mt:Pages tag="@topnav" sort_by="title" limit="3">
+    <MTSetVarBlock name="this_page_id"><$MTPageID$></MTSetVarBlock>
+    <li class="<mt:if name="nav_on" eq="$this_page_id"> on</mt:if>"><a href="<mt:PagePermalink />"><mt:PageTitle /></a></li>
+    </mt:Pages>
+    
+    <mt:Pages tags="@about" sort_by="title" limit="1">
+    <MTSetVarBlock name="this_page_id"><$MTPageID$></MTSetVarBlock>
+    <li class="<mt:if name="nav_on" eq="$this_page_id"> on</mt:if>"><a href="<mt:PagePermalink />"><mt:PageTitle /></a></li>
+    </mt:Pages>
+    
+    <mt:Pages tags="@contact" sort_by="title" limit="1">
+    <MTSetVarBlock name="this_page_id"><$MTPageID$></MTSetVarBlock>
+    <li class="last<mt:if name="nav_on" eq="$this_page_id"> on</mt:if>"><a href="<mt:PagePermalink />"><mt:PageTitle /></a></li>
+    </mt:Pages>
+    
+</ul>
+</__trans_section>

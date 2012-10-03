@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Recent Comments</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogRelativeURL$>meta/css/master.css" />
+</head>
+
+<body class="recentcomments">
+
+<!-- BEGIN #content -->
+<div id="content">
+
+<h1>Recent Comments</h1>
+
+<MTCollateCollect>
+  <MTComments lastn="30" sort_order="descend">
+    <$MTSetVar name="hidden" value="false"$><MTCommentEntry><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="hidden"><MTSetVar name="hidden" value="true"></MTIfKeyExists></MTKeyValues></MTCategory></MTCommentEntry>
+    <MTIfNotEqual a="[MTGetVar name='hidden']" b="true">
+      <MTCollateRecord>
+        <MTCollateSetField name="authorlink"><$MTCommentAuthorLink$></MTCollateSetField>
+        <MTCollateSetField name="sortdate"><$MTCommentDate format="%Y-%m-%d-%H-%M-%S"$></MTCollateSetField>
+        <MTCollateSetField name="date"><$MTCommentDate format="%e %b %Y"$></MTCollateSetField>
+        <MTCollateSetField name="commentid"><$MTCommentID pad="1"$></MTCollateSetField>
+        <MTCollateSetField name="comment"><$MTCommentBody smarty_pants="1"$></MTCollateSetField>
+        <MTCommentEntry>
+          <MTCollateSetField name="entrytitle"><$MTEntryTitle smarty_pants="1"$></MTCollateSetField>
+          <MTCollateSetField name="entrylink"><$MTEntryLink relative_url="1"$></MTCollateSetField>
+          <MTCollateSetField name="entryid"><$MTEntryID$></MTCollateSetField>
+          <MTCollateSetField name="thumb"><$MTEntryMore$></MTCollateSetField>
+          <MTCollateSetField name="tag"><MTIfNonEmpty tag="MTEntryKeywords"> <$MTEntryKeywords lower_case="1"$></MTIfNonEmpty></MTCollateSetField>
+          <MTCollateSetField name="vclass"><MTCollect 
+            tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+            a="[MTCollectedAttr attr='height']"
+            b="[MTCollectedAttr attr='width']"
+            numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect></MTCollateSetField>
+          <MTCollateSetField name="galleryname"><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists></MTKeyValues></MTCategory></MTCollateSetField>
+        </MTCommentEntry>
+      </MTCollateRecord>
+    </MTIfNotEqual>
+  </MTComments>
+</MTCollateCollect>
+
+<MTIfGreater a="[MTBlogCommentCount]" b="0">
+<ul class="commentlist">
+<MTCollateList limit="15 sortdate:-" sort="sortdate:-">
+  <li>
+    <p class="slides<MTCollateField name="tag">"><a href="<MTCollateField name="entrylink">"<MTCollateField name="vclass">><MTCollateField name="thumb"></a></p>
+    <p class="commenter">On <MTCollateField name="date">, <MTCollateField name="authorlink"> <a href="<MTCollateField name="entrylink">#cid-<MTCollateField name="commentid">">wrote</a>:</p>
+    <MTCollateField name="comment">
+    <p class="commenton">From: <a href="<MTCollateField name="entrylink">"><MTCollateField name="entrytitle"></a> <em>(<MTCollateField name="galleryname">)</em></p>
+  </li>
+  
+</MTCollateList>
+</ul>
+<MTElse>
+<p>No comments yet.</p>
+</MTElse></MTIfGreater>
+
+
+<div id="feeds">
+  <h2>Global Feeds</h2>
+  <ul>
+    <li><a href="<$MTBlogURL$>galleries/galleries.xml" title="RSS feed for recent galleries"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Galleries</a></li>
+    <li><a href="<$MTBlogURL$>index.xml" title="RSS feed for recent photos"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Photos</a></li>
+    <li><a href="<$MTBlogURL$>comments/comments.xml" title="RSS feed for recent comments"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Comments</a></li>
+  </ul>
+</div>
+
+</div>
+<!-- END #content -->
+
+
+<p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName smarty_pants="1"$></a> > Recent Comments</p>  
+
+
+<$MTInclude module="Footer"$>
+</body>
+</html>

@@ -1,0 +1,193 @@
+/* edit_field.tmpl ------------------------------------------- */
+
+#tag-field .spinner p {
+    margin: 10px 0;
+    padding: 5px;
+    border-width: 1px 0;
+    border-style: solid;
+	font-weight: bold;
+}
+
+.blog #tag-field .spinner p {
+	background-color: #eaf2ff;
+	border-color: #c3cfdb;
+}
+
+.system #tag-field .spinner p {
+	background-color: #f3f3f3;
+	border-color: #CFCFCF;
+}
+
+#tag-field .spinner img {background-image: url(../../images/spinner-right.gif);}
+.active#tag-field .spinner img { background-image: url(../../images/spinner-bottom.gif); }
+.active#tag-field #code { display: block; }
+#tag-field #code { display: none; }
+#code { padding-left: 20px; margin-bottom: 10px;}
+
+#edit_field #basename-field .field-content #basename-lock { float: none; }
+#edit_field #basename-lock { display: inline; }
+
+/* reorder_fields.tmpl --------------------------------------- */
+
+#customfields-reorder-widget .widget-header a {
+    background: url(../../images/spinner-right.gif) no-repeat left center;
+    padding-left: 11px;
+}
+#customfields-reorder-widget.active .widget-header a {
+    background-image: url(../../images/spinner-bottom.gif);
+}
+
+#customfields-reorder-widget .widget-content {
+    display: none;
+}
+
+#customfields-reorder-widget.active .widget-content {
+    display: block;
+}
+
+.dbx-clone {
+	position: absolute;
+	visibility: hidden;
+}
+.dbx-clone, .dbx-clone .dbx-handle-cursor { cursor: move !important; }
+.dbx-dummy {
+	display: block;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+.dbx-group, .dbx-box, .dbx-handle {
+	position: relative;
+	display: block;
+}
+.dbx-box {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.dbx-handle {
+	border: 1px solid #fff;
+	padding: 3px;
+	font-size: x-small;
+	cursor:pointer;
+	margin-bottom:5px;
+	text-align: left;
+	text-transform: uppercase;
+	background-color: #fff;
+}
+
+.blog .dbx-handle { border-color: #a3b8cc; }
+.system .dbx-handle { border-color: #cfcfcf; }
+
+/* date-picker.tmpl ---------------------------------------  */
+
+.datetime_field {
+	float: left;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+	padding: 2px 4px;
+	width: 100px;
+}
+
+.customfield-date-container a {
+	float: left;
+	margin-top: 3px;
+	margin-right: 7px;
+}
+
+iframe#datepickeriframe { border: 0; }
+
+/* the div that holds the date picker calendar */
+.dpDiv {
+	}
+
+
+/* the table (within the div) that holds the date picker calendar */
+.dpTable {
+	font-size: 11px;
+	text-align: center;
+	color: #333;
+    background-color: #fff;
+    border: 1px solid #999;
+}
+
+
+/* a table row that holds date numbers (either blank or 1-31) */
+.dpTR {}
+
+/* the top table row that holds the month, year, and forward/backward buttons */
+.dpTitleTR { 
+	background:#3399CC; 
+	margin-bottom: 4px;
+}
+
+/* the second table row, that holds the names of days of the week (Mo, Tu, We, etc.) */
+.dpDayTR {}
+
+/* the bottom table row, that has the "This Month" and "Close" buttons */
+.dpTodayButtonTR { background: #FFF; }
+
+/* a table cell that holds a date number (either blank or 1-31) */
+.dpTD {
+	border: 1px solid #fff;
+	width: 20px;
+}
+
+/* a table cell that holds a highlighted day (usually either today's date or the current date field value) */
+.dpDayHighlightTD { border: 1px solid #444; }
+
+/* the date number table cell that the mouse pointer is currently over (you can use contrasting colors to make it apparent which cell is being hovered over) */
+.dpTDHover { cursor: pointer; }
+
+
+/* the table cell that holds the name of the month and the year */
+.dpTitleTD {}
+
+
+/* a table cell that holds one of the forward/backward buttons */
+.dpButtonTD {
+}
+
+
+/* the table cell that holds the "This Month" or "Close" button at the bottom */
+.dpTodayButtonTD {
+	padding-top: 10px;
+}
+
+
+/* a table cell that holds the names of days of the week (Mo, Tu, We, etc.) */
+.dpDayTD {
+	padding-top: 10px;
+	background: #F2F7FB;
+	border: 1px solid #FFF;
+}
+
+
+/* additional style information for the text that indicates the month and year */
+.dpTitleText {
+	font-size: 12px;
+	color: #FFF;
+	font-weight: bold;
+	}
+
+
+/* additional style information for the cell that holds a highlighted day (usually either today's date or the current date field value) */ 
+.dpDayHighlight {}
+
+/* the forward/backward buttons at the top */
+.dpButton {
+	background: transparent;
+	border: 0;
+	font-size:10px;
+	color:#FFF;
+	cursor: pointer;
+}
+
+/* the "This Month" and "Close" buttons at the bottom */
+.dpTodayButton {
+	background: transparent;
+	border: 0;
+	cursor: pointer;
+	font-size: 10px;
+}

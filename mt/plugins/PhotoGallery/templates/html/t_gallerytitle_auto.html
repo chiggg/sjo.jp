@@ -1,0 +1,39 @@
+<MTCategoryOfArchive><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTKeyValue key='title' smarty_pants='1']"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTArchiveTitle smarty_pants='1']"$></MTIfNoKeyExists><MTEntries lastn="1"><$MTSetVar2 name="titleimg" value="[MTEntryBody]"$></MTEntries><MTIfKeyExists key="titleimgid"><MTEntry id="[MTKeyValue key='titleimgid']"><$MTSetVar2 name="titleimg" value="[MTEntryBody]"$></MTEntry></MTIfKeyExists><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><$MTGetVar2 name="gallerytitle"></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogRelativeURL$>meta/css/master.css" />
+  <MTIfKeyExists key="css"><link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus='pld'$>/<$MTKeyValue key="css"$>" /></MTIfKeyExists>
+</head>
+
+<body class="title auto">
+
+<!-- BEGIN #content -->
+<div id="content"<MTCollect tags="img"><MTCollectThis><$MTGetVar2 name="titleimg"$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect>>
+
+  <div id="titleimg"><a href="gallery/"><$MTGetVar2 name="titleimg"$></a></div>
+  
+  <div id="gallerydesc">
+  <h1><$MTGetVar2 name="gallerytitle"></h1>
+  <p><MTIfNonEmpty tag="MTKeyValuesStripped"><$MTKeyValuesStripped smarty_pants="1"$><MTElse><em>No description</em></MTElse></MTIfNonEmpty></p>
+  <p>Updated: <MTEntries lastn="1"><$MTEntryDate format="%B %Y"$></MTEntries></p>
+  <p>(<em><$MTCategoryCount$> photos</em>)
+    <a href="feed:<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/index.xml" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></p>
+  <p><a href="gallery/" class="i"><img src="<$MTBlogRelativeURL$>meta/img/btn_view_gallery.gif" alt="View gallery" width="97" height="21" /></a></p>
+  </div>
+
+</div>
+<!-- END #content -->
+
+<p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName smarty_pants="1"$></a> > <$MTGetVar2 name="gallerytitle"></p>  
+
+</MTKeyValues></MTCategoryOfArchive>
+
+<$MTInclude module="Footer"$>
+
+</body>
+</html>

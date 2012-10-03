@@ -1,0 +1,29 @@
+<div id="container">
+<div id="container-inner">
+
+<div id="header">
+<h1><a href="<$MTBlogURL$>"><$MTGetVar name="title"$></a></h1>
+<p>
+<mt:if name="main_index"><$MTBlogDescription$>
+<mt:else><mt:if name="archive_index"><$MTBlogDescription$>
+<mt:else><$MTGetVar name="title"$></mt:if></mt:if>
+</p>
+</div>
+
+
+<mt:if name="entry_archive">
+<p class="navigation">
+<MTEntryPrevious><span class="prev"><a href="<$MTEntryPermalink$>" title="<$MTEntryTitle$>"><$MTEntryTitle$></a>：Prev</span></MTEntryPrevious>
+｜<a href="<$MTLink template="archive_index"$>">ArchiveS</a>｜
+<MTEntryNext><span class="next">Next：<a href="<$MTEntryPermalink$>" title="<$MTEntryTitle$>"><$MTEntryTitle$></a></span></MTEntryNext>
+</p>
+</mt:if>
+
+
+<mt:if name="archive_listing">
+<p class="navigation">
+<MTArchivePrevious><span class="prev"><a href="<$MTArchiveLink$>" title="<$MTArchiveTitle$>"><$MTArchiveTitle$></a>：Prev</span></MTArchivePrevious>
+｜<a href="<$MTLink template="archive_index"$>">ArchiveS</a>｜
+<MTArchiveNext><span class="next">Next：<a href="<$MTArchiveLink$>" title="<$MTArchiveTitle$>"><$MTArchiveTitle$></a></span></MTArchiveNext>
+</p>
+</mt:if>

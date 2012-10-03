@@ -1,0 +1,123 @@
+<mt:setvarblock name="page_title"><__trans phrase="Custom Fields"></mt:setvarblock>
+<mt:setvarblock name="system_msg">
+    <mt:if name="saved">
+        <mtapp:statusmsg
+            id="saved"
+            class="success">
+            <__trans phrase="Your changes have been saved.">
+        </mtapp:statusmsg>
+    </mt:if>
+    <mt:if name="saved_deleted">
+        <mtapp:statusmsg
+            id="saved-deleted"
+            class="success">
+            <__trans phrase="The selected fields(s) has been deleted from the database.">
+        </mtapp:statusmsg>
+    </mt:if>
+</mt:setvarblock>
+<mt:setvarblock name="content_header">
+    <ul class="action-link-list">
+        <li><a href="<mt:var name="script_url">?__mode=edit_field&amp;blog_id=<mt:var name="blog_id">" class="icon-left icon-create"><__trans phrase="New [_1] Field" params="<mt:var name="obj_type_label">"></a></li>
+    </ul>
+</mt:setvarblock>
+<mt:setvarblock name="related_content">
+    <mtapp:widget
+        id="quickfilters"
+        label="<__trans phrase="Quickfilters">">
+        <mtapp:listfilters>
+    </mtapp:widget>
+</mt:setvarblock>
+
+<mt:setvarblock name="html_head" append="1">
+<script type="text/javascript">
+<!--
+var tableSelect;
+function init()
+{
+    // setup
+    tableSelect = new TC.TableSelect( "field-listing-table" );
+    tableSelect.rowSelect = true;
+}
+
+TC.attachLoadEvent( init );
+//-->
+</script>
+</mt:setvarblock>
+<mt:setvarblock name="list_filter_form">
+<div class="listing-filter">
+    <div class="listing-filter-inner inner pkg">
+            <div class="filter">
+                <div class="filter-title">
+            <mt:unless name="filter">
+                    <strong><__trans phrase="All [_1]" params="<$mt:var name="object_label_plural"$>"></strong>
+                    <!-- <a href="#" onclick="toggleFilter()" class="filter-link">[ <__trans phrase="change"> ]</a> -->
+            <mt:else>
+                <mt:if name="filter_key">
+                    <strong><__trans phrase="Showing only: [_1]" params="<mt:var name="filter_label">"></strong>
+                    <a class="filter-link" href="<mt:var name="script_url">?__mode=<mt:var name="mode"><mt:if name="blog_id">&amp;blog_id=<mt:var name="blog_id"></mt:if><mt:if name="is_power_edit">&amp;is_power_edit=1</mt:if>">[ <__trans phrase="Remove filter"> ]</a>
+                </mt:if>
+            </mt:unless>
+                </div>
+            </div>
+    </div>
+</div>
+</mt:setvarblock>
+<mt:setvarblock name="action_buttons">
+        <a href="javascript:void(0)"
+            onclick="doRemoveItems(getByID('<$mt:var name="object_type"$>-listing-form'), '<__trans phrase="field">', '<__trans phrase="fields">'); return false;"
+            accesskey="x"
+            title="<__trans phrase="Delete selected fields (x)">"
+            ><__trans phrase="Delete"></a>
+</mt:setvarblock>
+<mt:setvarblock name="content_nav">
+    <mt:if name="blog_id">
+        <mt:include name="include/cfg_content_nav.tmpl">
+    <mt:else>
+    <mt:include name="include/cfg_system_content_nav.tmpl">
+    </mt:if>
+</mt:setvarblock>
+<mt:include name="include/header.tmpl">
+
+<mt:var name="list_filter_form">
+    
+    <mtapp:listing
+        empty_message="<__trans phrase="No fields could be found.">"
+        hide_pager="1">
+        <mt:if __first__>
+                <thead>
+                    <tr>
+                        <th class="cb"><input type="checkbox" name="id-head" value="all" class="select" /></th>
+                        <th class="si"><img src="<mt:var name="static_uri">images/status_icons/invert-flag.gif" alt="<__trans phrase="Required?">" title="<__trans phrase="Required?">" width="9" height="9" /></th>
+                        <th id="cf-name"><__trans phrase="Name"></th>
+                        <th id="cf-type"><__trans phrase="Type"></th>
+                        <th id="cf-blog"><__trans phrase="Blog"></th>
+                        <th id="cf-req"><img src="<mt:var name="static_uri">images/spacer.gif" alt="<mt:var name="obj_type_label">" width="11" height="11" alt="<__trans phrase="Required?">" style="background:url(<mt:var name="static_uri">addons/Commercial.pack/images/star.gif) no-repeat;" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+        </mt:if>
+                    <tr class="<mt:if name="__odd__">odd<mt:else>even</mt:if>">
+                        <td class="cb">
+                            <mt:if name="system_overview">
+                                <input type="checkbox" name="id" value="<mt:var name="id">" class="select" />
+                            <mt:else>
+                                <mt:if name="blog_id"><input type="checkbox" name="id" value="<mt:var name="id">" class="select" /></mt:if>
+                            </mt:if>
+                        </td>
+                        <td class="si">
+                            <img src="<mt:var name="static_uri">images/spacer.gif" alt="<mt:var name="obj_type_label">" width="11" height="11" style="background:url(<mt:var name="static_uri">addons/Commercial.pack/images/<mt:var name="obj_type">.gif) no-repeat;" />
+                        </td>
+                        <td><a href="<mt:var name="script_url">?__mode=edit_field&amp;blog_id=<mt:var name="blog_id">&amp;id=<mt:var name="id">"><mt:var name="name"></a></td>
+                        <td><mt:var name="type_label"></td>
+                        <td><a href="<mt:var name="script_url">?__mode=list_field&amp;blog_id=<mt:var name="blog_id">"><mt:if name="blog_id"><mt:var name="blog_name"><mt:else><__trans phrase="System-Wide"></mt:if></a></td>
+                        <td class="si <mt:if name="required">status-linked<mt:else>status-unlinked</mt:if>"> 
+                            <img src="<mt:var name="static_uri">images/spacer.gif" alt="<mt:var name="obj_type_label">" width="9" height="9" />
+                        </td>
+                    </tr>
+        <mt:if __last__>
+                </tbody>
+        </mt:if>
+    </mtapp:listing>
+
+
+<mt:include name="include/footer.tmpl">

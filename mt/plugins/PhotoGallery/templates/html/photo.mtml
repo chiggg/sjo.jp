@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><$MTEntryTitle smarty_pants="1"$></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogRelativeURL$>meta/css/master.css" />
+<MTIfNonEmpty tag="MTEntryCategory"><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="css">  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus='pld'$>/<$MTKeyValue key="css"$>" /></MTIfKeyExists></MTKeyValues></MTCategory></MTIfNonEmpty>
+<MTEntryIfCommentsOpen>  <script type="text/javascript">var blogrelurl = "<$MTBlogRelativeURL$>";</script>
+  <script type="text/javascript" src="<$MTBlogRelativeURL$>meta/scripts/rememberMe.js"></script>
+  <script type="text/javascript" src="<$MTBlogRelativeURL$>meta/scripts/comments.js"></script></MTEntryIfCommentsOpen>
+</head>
+
+<body class="photosolo">
+
+<$MTSetVar2 name="entryid" value="[MTEntryID]"$><$MTSetVar2 name="index" value="1"$><$MTSetVar2 name="indexfound" value="false"$><MTIfNonEmpty tag="MTEntryCategory"><MTCategory name="[MTEntryCategory]"><MTEntries lastn="10000"><MTIfEqual a="[MTEntryID]" b="[MTGetVar2 name='entryid']"><$MTSetVar2 name="indexfound" value="true"$><MTElse><MTIfNotEqual a="[MTGetVar2 name='indexfound']" b="true"><$MTAddVar name="index" value="1"$></MTIfNotEqual></MTElse></MTIfEqual></MTEntries></MTCategory><MTElse><$MTSetVar2 name="index" value="n/a"$></MTElse></MTIfNonEmpty>
+
+<!-- BEGIN #content -->
+<div id="content"<MTCollect tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect>>
+
+<div id="desc">
+  <h1><$MTEntryTitle smarty_pants="1"$></h1>
+  <p><MTIfNonEmpty tag="MTEntryExcerpt"><$MTEntryExcerpt smarty_pants="1"$><MTElse><em>No description</em></MTElse></MTIfNonEmpty></p>
+</div>
+
+<div id="main">
+  <p id="photo"><$MTEntryBody$></p>
+  <div id="meta">
+    <ul>
+      <li class="count">Photo <$MTGetVar2 name="index"$> of <MTIfNonEmpty tag="MTEntryCategory"><MTCategory name="[MTEntryCategory]"><$MTCategoryCount$></MTCategory></MTIfNonEmpty></li>
+      <li class="date"><$MTEntryDate format="%e %B %Y"$></li>
+      <li class="tags"><MTIfNonEmpty tag="MTEntryKeywords"><$MTEntryKeywords$></MTIfNonEmpty></li>
+    </ul>
+  </div>
+
+<MTEntryIfAllowComments>
+<!-- BEGIN #commentblock -->
+<div id="commentblock">
+
+  <h2><MTIfGreater a="[MTEntryCommentCount]" b="0" numeric="1"><$MTEntryCommentCount$> comment<MTIfNotEqual a="[MTEntryCommentCount]" b="1" numeric="1">s</MTIfNotEqual><MTEntryIfCommentsOpen> so far</MTEntryIfCommentsOpen> <a href="#comments" id="showcomments"><img src="<$MTBlogRelativeURL$>meta/img/btn_show.gif" width="35" height="11" alt="SHOW" /></a> <a href="#content" id="hidecomments"><img src="<$MTBlogRelativeURL$>meta/img/btn_hide.gif" width="35" height="11" alt="HIDE" /></a> <MTElse>No comments yet</MTElse></MTIfGreater></h2>
+  
+<MTIfGreater a="[MTEntryCommentCount]" b="0" numeric="1">
+<!-- BEGIN #comments -->
+<div id="comments">
+
+  <dl class="commentlist">
+
+<MTComments>
+    <dt id="comment<$MTCommentOrderNumber$>">
+  <a href="#comment<$MTCommentOrderNumber$>" class="postno" title="Link to Comment <$MTCommentOrderNumber$>" id="cid-<$MTCommentID pad="1"$>"><$MTCommentOrderNumber$>.</a>
+  <em>On <$MTCommentDate format="%e %b %Y"$>, <$MTCommentAuthorLink$> wrote:</em>
+    </dt>
+    <dd>
+<$MTCommentBody smarty_pants="1"$>
+    </dd>
+
+</MTComments> </dl>
+</MTIfGreater>
+
+
+<MTEntryIfCommentsOpen>
+<p class="mainbutton" id="addcommentbutton"><a href="#addcomment" class="btn"><img src="<$MTBlogRelativeURL$>meta/img/btn_add_a_comment.gif" alt="" width="116" height="21" /></a></p>
+
+<!-- BEGIN #addcomment -->
+<div id="addcomment">
+<h2>Add a comment</h2>
+
+<$MTSetVar name="static" value="1"$>
+<$MTSetVar name="preview" value="0"$>
+<$MTInclude module="Comment Fields"$>
+</div>
+<!-- END #addcomment -->
+<MTElse>
+<p class="sub">Comments now closed for this photo.</p>
+</MTElse></MTEntryIfCommentsOpen>
+
+<MTIfGreater a="[MTEntryCommentCount]" b="0" numeric="1">
+</div>
+<!-- END #comments -->
+</MTIfGreater>
+
+</div>
+<!-- END #commentblock -->
+</MTEntryIfAllowComments>
+
+</div>
+
+
+<MTEntryPreviousInCategory><div id="prev" class="slides">
+  <p class="<MTIfNonEmpty tag="MTEntryKeywords"><$MTEntryKeywords lower_case="1"$></MTIfNonEmpty>"><a href="<$MTEntryLink relative_url="1"$>"<MTCollect tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect> accesskey="z"><$MTEntryMore$> <em>previous</em></a></p>
+</div></MTEntryPreviousInCategory>
+
+<MTEntryNextInCategory><div id="next" class="slides">
+  <p class="<MTIfNonEmpty tag="MTEntryKeywords"><$MTEntryKeywords lower_case="1"$></MTIfNonEmpty>"><a href="<$MTEntryLink relative_url="1"$>"<MTCollect tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect> accesskey="x"><$MTEntryMore$> <em>next</em></a></p>
+</div></MTEntryNextInCategory>
+
+
+</div>
+<!-- END #content -->
+
+
+<p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName smarty_pants="1"$></a> > <a href="<$MTBlogArchiveURL$><$MTEntryCategory dirifyplus='pld'$>/"><MTIfNonEmpty tag="MTEntryCategory"><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists></MTKeyValues></MTCategory><MTElse>No Gallery Defined</MTElse></MTIfNonEmpty></a> > <a href="<$MTBlogArchiveURL$><$MTEntryCategory dirifyplus='pld'$>/gallery/">Gallery</a> > <$MTEntryTitle smarty_pants="1"$></p>
+
+
+<!-- Entry ID: <$MTEntryID$> -->
+<$MTInclude module="Footer"$>
+</body>
+</html>

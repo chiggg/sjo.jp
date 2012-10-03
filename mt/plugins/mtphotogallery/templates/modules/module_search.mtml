@@ -1,0 +1,17 @@
+<div id="module-search">
+<h4>検索</h4>
+<div class="module-content">
+<form method="get" action="<$mt:CGIPath$><$mt:SearchScript$>">
+<input type="text" id="search" class="ti" name="search" value="<$mt:SearchString$>" />
+<input type="submit" accesskey="4" value="検索" />
+<mt:If name="search_results_template">
+<input type="hidden" name="IncludeBlogs" value="<$mt:SearchIncludeBlogs$>" />
+<p>
+<input type="checkbox" name="CaseSearch" /> 大文字/小文字を区別する
+<input type="checkbox" name="RegexSearch" /> 正規表現
+</p>
+<mt:else>
+<input type="hidden" name="IncludeBlogs" value="<$mt:BlogID$>" />
+</mt:if>
+</form>
+</div></div>

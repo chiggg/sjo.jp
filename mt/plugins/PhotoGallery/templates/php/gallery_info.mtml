@@ -1,0 +1,11 @@
+<?php
+  $entryids = Array("x"<MTEntries lastn="10000">,"<$MTEntryID$>"</MTEntries>);
+<MTCategoryOfArchive><MTKeyValues source="[MTCategoryDescription]">
+  $gallerytitle = "<MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists>";
+  $gallerydesc = '<MTIfNonEmpty tag="MTKeyValuesStripped"><$MTKeyValuesStripped smarty_pants="1" encode_php="q"$><MTElse><em>No description</em></MTElse></MTIfNonEmpty>';
+  $gallerycount = <$MTCategoryCount$>;
+  $galleryurl = "<$MTBlogArchiveURL relative_url="1"$><$MTCategoryLabel dirifyplus="pld"$>/";
+  $fullgalleryurl = "<$MTBlogArchiveURL$><$MTCategoryLabel dirifyplus="pld"$>/";
+  <MTIfKeyExists key="css">$customcss = "<$MTKeyValue key="css"$>";</MTIfKeyExists>
+</MTKeyValues></MTCategoryOfArchive>
+?>

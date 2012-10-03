@@ -1,0 +1,3 @@
+<Files ~ "^sqlitedb*">
+deny from all
+</Files>

@@ -1,0 +1,15 @@
+<div id="module-comment">
+<h3>Recent Comment</h3>
+<div class="module-content">
+
+<mt:ifnonzero tag="mt:BlogCommentCount">
+<mt:comments lastn="10" sort_order="descend">
+<mt:CommentsHeader><ul></mt:CommentsHeader>
+<li>
+<a href="<mt:CommentEntry><$mt:EntryPermalink$></mt:CommentEntry>#comment-<$mt:CommentID$>">
+<$MTCommentDate format="%y/%m/%d"$>：<$mt:CommentAuthor default="名無しさん"$>：<$mt:CommentBody remove_html="1" trim_to="10"$></a>
+</li>
+<mt:CommentsFooter></ul></mt:CommentsFooter>
+</mt:comments>
+</mt:ifnonzero>
+</div></div>

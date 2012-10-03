@@ -1,0 +1,17 @@
+/*  $Id: styles.css 83433 2008-06-18 21:44:24Z bchoate $  */
+
+/* codebase */
+@import url("css/reset.css");
+/*@import url("css/fonts.css");*/
+
+/* layout */
+@import url("css/structure.css");
+
+/* messaging */
+@import url("css/messaging.css");
+
+/* branding */
+/*@import url("css/paint.css");*/
+
+/* utilities */
+@import url("css/utilities.css");

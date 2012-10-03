@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Gallery Archive</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="<$MTBlogRelativeURL$>meta/css/master.css" />
+</head>
+
+<body class="archive">
+
+<!-- BEGIN #content -->
+<div id="content">
+
+<h1>Gallery Archive</h1>
+
+<$MTSetVar2 name="galleryno" value="0"$>
+<MTCollateCollect>
+  <MTCategories><MTFilterCategories exclude="Favorites">`
+    <MTKeyValues source="[MTCategoryDescription]">
+    <MTIfNoKeyExists key="hidden">
+    <MTCollateRecord>
+      <MTEntries lastn="1">
+        <MTCollateSetField name="sortdate"><$MTEntryDate format="%Y-%m-%d-%H-%M-%S"$></MTCollateSetField>
+        <MTCollateSetField name="date"><$MTEntryDate format="%b %Y"$></MTCollateSetField>
+        <MTCollateSetField name="img"><$MTEntryMore$></MTCollateSetField>
+      </MTEntries>
+      <MTIfKeyExists key="titleimgid"><MTEntry id="[MTKeyValue key='titleimgid']"><MTCollateSetField name="img"><$MTEntryMore$></MTCollateSetField></MTEntry></MTIfKeyExists>
+      <MTCollateSetField name="path"><$MTCategoryLabel dirifyplus="pld"$></MTCollateSetField>
+      <MTCollateSetField name="title"><MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists></MTCollateSetField>
+      <MTCollateSetField name="count"><$MTCategoryCount$></MTCollateSetField>
+      <MTCollateSetField name="desc"><MTIfNonEmpty tag="MTKeyValuesStripped"><MTFirstNWords n="20" append="&#8230;" append_decode_html="1"><$MTKeyValuesStripped smarty_pants="1" remove_html="1"$></MTFirstNWords><MTElse><em>No description</em></MTElse></MTIfNonEmpty></MTCollateSetField>
+    </MTCollateRecord>
+      <$MTAddVar name="galleryno" value="1"$>
+    </MTIfNoKeyExists>
+    </MTKeyValues>
+  </MTFilterCategories></MTCategories>
+</MTCollateCollect>
+
+<div class="galleries useslides">
+  <h2>All galleries</h2>
+<MTIfGreater a="[MTGetVar2 name='galleryno']" b="0">
+<MTGrid num_columns="3"><MTCollateList sort="sortdate:-"><MTGridCell>
+<MTGridIfLeftColumn>
+  <ul>
+</MTGridIfLeftColumn>    <li>
+      <h3><a href="<$MTBlogArchiveURL relative_url="1"$><MTCollateField name="path">/"><MTCollateField name="title"></a></h3>
+      <a href="<$MTBlogArchiveURL relative_url="1"$><MTCollateField name="path">/" class="img<MTCollect tags="img"><MTCollectThis><MTCollateField name="img"></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> v</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect>"><MTCollateField name="img"></a>
+      <p><em>(<MTCollateField name="count"> photos)</em> <MTCollateField name="desc"></p>
+      <p><MTCollateField name="date"></p>
+    </li>
+<MTGridIfRightColumn>  </ul>
+</MTGridIfRightColumn></MTGridCell></MTCollateList><MTGridTrailingCells><MTGridIfRightColumn>  </ul></MTGridIfRightColumn></MTGridTrailingCells></MTGrid><MTElse><p>No galleries published yet.</p></MTElse></MTIfGreater>
+</div>
+
+
+<div id="feeds">
+  <h2>Global Feeds</h2>
+  <ul>
+    <li><a href="<$MTBlogURL$>galleries/galleries.xml" title="RSS feed for recent galleries"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Galleries</a></li>
+    <li><a href="<$MTBlogURL$>index.xml" title="RSS feed for recent photos"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Photos</a></li>
+    <li><a href="<$MTBlogURL$>comments/comments.xml" title="RSS feed for recent comments"><img src="<$MTBlogRelativeURL$>meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Comments</a></li>
+  </ul>
+</div>
+
+</div>
+<!-- END #content -->
+
+
+<p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName smarty_pants="1"$></a> > Gallery Archive</p>  
+
+
+<$MTInclude module="Footer"$>
+</body>
+</html>

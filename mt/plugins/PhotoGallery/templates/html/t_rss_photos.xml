@@ -1,0 +1,43 @@
+<MTCollateCollect>
+  <MTCategories><MTFilterCategories exclude="Favorites">
+    <MTKeyValues source="[MTCategoryDescription]">
+    <MTIfKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTKeyValue key='title']"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTSetVar2 name="gallerytitle" value="[MTCategoryLabel]"$></MTIfNoKeyExists>
+    <MTIfNoKeyExists key="hidden">
+    <MTEntries lastn="15" sort_order="descend">
+      <MTCollateRecord>
+        <MTCollateSetField name="title"><$MTEntryTitle$></MTCollateSetField>
+        <MTCollateSetField name="link"><$MTEntryLink$></MTCollateSetField>
+        <MTCollateSetField name="desc"><p><a href="<$MTEntryLink$>"><$MTEntryMore$></a></p><p><MTIfNonEmpty tag="MTEntryExcerpt"><$MTEntryExcerpt$><MTElse>No description</MTElse></MTIfNonEmpty></p></MTCollateSetField>
+        <MTCollateSetField name="gallery"><$MTGetVar2 name="gallerytitle"$></MTCollateSetField>
+        <MTCollateSetField name="date"><$MTEntryDate format_name="rfc822"$></MTCollateSetField>
+        <MTCollateSetField name="sortdate"><$MTEntryDate format="%Y-%m-%d-%H-%M-%S"$></MTCollateSetField>
+      </MTCollateRecord>
+    </MTEntries>
+    </MTIfNoKeyExists>
+    </MTKeyValues>
+  </MTFilterCategories></MTCategories>
+</MTCollateCollect><?xml version="1.0" encoding="<$MTPublishCharset$>"?>
+
+<rss version="2.0">
+<channel>
+<title><$MTBlogName remove_html="1" encode_xml="1"$></title>
+<link><$MTBlogURL$></link>
+<description><$MTBlogDescription remove_html="1" encode_xml="1"$></description>
+<copyright>Copyright <$MTDate format="%Y"$></copyright>
+<lastBuildDate><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></lastBuildDate>
+<generator>http://www.movabletype.org/?v=<$MTVersion$></generator>
+<docs>http://blogs.law.harvard.edu/tech/rss</docs> 
+
+<MTCollateList limit="15 sortdate:-" sort="sortdate:-">
+<item>
+<title><$MTCollateField name="title" remove_html="1" encode_xml="1"$></title>
+<description><$MTCollateField name="desc" encode_xml="1"$></description>
+<link><$MTCollateField name="link" encode_xml="1"$></link>
+<guid><$MTCollateField name="link" encode_xml="1"$></guid>
+<category><$MTCollateField name="gallery" remove_html="1" encode_xml="1"$></category>
+<pubDate><$MTCollateField name="date"$></pubDate>
+</item>
+</MTCollateList>
+
+</channel>
+</rss>

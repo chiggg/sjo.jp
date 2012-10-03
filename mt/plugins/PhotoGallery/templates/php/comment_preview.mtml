@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Comment Preview: <$MTEntryTitle smarty_pants="1"$></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen, projection" href="<$MTStaticWebPath$>plugins/PhotoGallery/meta/css/master.css" />
+  <script type="text/javascript" src="<$MTBlogURL$>meta/scripts/rememberMe.js"></script>
+</head>
+
+<body class="comments-entry">
+
+
+<div id="comment-photo">
+  <ul class="slides">
+    <li<MTIfNonEmpty tag="MTEntryKeywords"> class="<$MTEntryKeywords dirifyplus="pld"$>"</MTIfNonEmpty>><a href="<$MTEntryLink$>"<MTCollect tags="img"><MTCollectThis><$MTEntryMore$></MTCollectThis><MTCollected><MTIfCollectedAttr attr="width"><MTIfCollectedAttr attr="height"><MTIfGreater
+    a="[MTCollectedAttr attr='height']"
+    b="[MTCollectedAttr attr='width']"
+    numeric="1"> class="v"</MTIfGreater></MTIfCollectedAttr></MTIfCollectedAttr></MTCollected></MTCollect> accesskey=","><$MTEntryMore$></a></li>
+  </ul>
+
+  <div id="desc">
+    <h1><$MTEntryTitle smarty_pants="1"$></h1>
+    <p><em class="date"><$MTEntryDate format="%e %B %Y"$></em>
+    <MTIfNonEmpty tag="MTEntryKeywords"><br /><$MTEntryKeywords smarty_pants="1"$></MTIfNonEmpty></p>
+  </div>
+</div>
+
+<!-- BEGIN #content -->
+<div id="content">
+
+
+<h2>Comment preview</h2>
+
+<p class="sub">Use the &ldquo;Post&rdquo; button below to publish your comment.</p>
+
+<dl class="commentlist">
+<dt><span class="postno"><$MTSetVar2 name="commentno" value="[MTEntryCommentCount]"$><$MTAddVar name="commentno" value="1"$><$MTGetVar2 name="commentno"$>.</span> <em>On <$MTCommentPreviewDate format="%e %b %Y"$>, <$MTCommentPreviewAuthorLink$> wrote:</em></dt>
+<dd><$MTCommentPreviewBody convert_breaks="1" smarty_pants="1"$></dd>
+</dl>
+
+<h2>Edit or post your comment</h2>
+<$MTSetVar name="static" value="1"$>
+<$MTSetVar name="preview" value="1"$>
+<$MTInclude module="Comment Fields"$>
+
+
+<MTIfGreater a="[MTEntryCommentCount]" b="0" numeric="1">
+<h2>Previous comment<MTIfNotEqual a="[MTEntryCommentCount]" b="1" numeric="1">s</MTIfNotEqual></h2>
+
+<dl class="commentlist"><MTComments>
+<dt id="comment<$MTCommentOrderNumber$>"><a href="#comment<$MTCommentOrderNumber$>" class="postno" title="Link to Comment <$MTCommentOrderNumber$>"><$MTCommentOrderNumber$>.</a> <em>On <$MTCommentDate format="%e %b %Y"$>, <$MTCommentAuthorLink$> wrote:</em></dt>
+<dd>
+<$MTCommentBody smarty_pants="1"$>
+</dd>
+
+</MTComments></dl>
+</MTIfGreater>
+
+
+
+</div>
+<!-- END #content -->
+
+<p id="path"><a href="<$MTBlogURL$>"><$MTBlogName smarty_pants="1"$></a> > <a href="<$MTBlogArchiveURL$><$MTEntryCategory dirifyplus='pld'$>/"><MTCategory name="[MTEntryCategory]"><MTKeyValues source="[MTCategoryDescription]"><MTIfKeyExists key="title"><$MTKeyValue key="title" smarty_pants="1"$></MTIfKeyExists><MTIfNoKeyExists key="title"><$MTCategoryLabel smarty_pants="1"$></MTIfNoKeyExists></MTKeyValues></MTCategory></a> > <a href="<$MTBlogArchiveURL$><$MTEntryCategory dirifyplus='pld'$>/gallery/">Gallery</a> > <a href="<$MTEntryLink$>"><$MTEntryTitle smarty_pants="1"$></a> > Comment Preview</p>
+
+
+<$MTInclude module="Footer"$>
+</body>
+</html>
